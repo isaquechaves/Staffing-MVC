@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
@@ -17,7 +18,7 @@ public class Funcionario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long Id;
+	private Long id;
 	
 	@NotBlank
 	private String cargo;
@@ -32,18 +33,34 @@ public class Funcionario {
 	@NotBlank
 	private String nome;
 	
+	@ManyToOne
+	private Vaga vaga;
 	
-	private Long alocacao_Id;
-	
-	
-	private Long local_de_trabalho;
+	@ManyToOne
+	private Gft gft;
+
+	public Vaga getVaga() {
+		return vaga;
+	}
+
+	public void setVaga(Vaga vaga) {
+		this.vaga = vaga;
+	}
+
+	public Gft getGft() {
+		return gft;
+	}
+
+	public void setGft(Gft gft) {
+		this.gft = gft;
+	}
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 	public String getCargo() {
@@ -76,22 +93,6 @@ public class Funcionario {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public Long getAlocacao_Id() {
-		return alocacao_Id;
-	}
-
-	public void setAlocacao_Id(Long alocacao_Id) {
-		this.alocacao_Id = alocacao_Id;
-	}
-
-	public Long getLocal_de_trabalho() {
-		return local_de_trabalho;
-	}
-
-	public void setLocal_de_trabalho(Long local_de_trabalho) {
-		this.local_de_trabalho = local_de_trabalho;
 	}
 	
 	

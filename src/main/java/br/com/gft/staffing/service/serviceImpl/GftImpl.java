@@ -3,11 +3,13 @@ package br.com.gft.staffing.service.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.com.gft.staffing.model.Gft;
 import br.com.gft.staffing.repository.GftRepository;
 import br.com.gft.staffing.service.GftService;
 
+@Service
 public class GftImpl implements GftService {
 
 	@Autowired

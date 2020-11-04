@@ -25,6 +25,15 @@ public class FuncionarioTecnologia {
 		return funcionario;
 	}
 
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
 	}

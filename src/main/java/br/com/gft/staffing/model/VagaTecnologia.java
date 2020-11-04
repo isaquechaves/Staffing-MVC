@@ -21,6 +21,16 @@ public class VagaTecnologia {
 	@ManyToOne
 	private Tecnologia tecnologia;
 
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Vaga getVaga() {
 		return vaga;
 	}

@@ -10,11 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.gft.staffing.model.Funcionario;
+import br.com.gft.staffing.model.FuncionarioTecnologia;
 import br.com.gft.staffing.model.Gft;
+import br.com.gft.staffing.model.Tecnologia;
 import br.com.gft.staffing.model.Vaga;
+import br.com.gft.staffing.model.VagaTecnologia;
 import br.com.gft.staffing.repository.FuncionarioRepository;
+import br.com.gft.staffing.repository.FuncionarioTecRepository;
 import br.com.gft.staffing.repository.GftRepository;
+import br.com.gft.staffing.repository.TecnologiaRepository;
 import br.com.gft.staffing.repository.VagaRepository;
+import br.com.gft.staffing.repository.VagaTecnologiaRepository;
 
 
 @Component
@@ -29,6 +35,14 @@ public class DummyData {
 	@Autowired
 	GftRepository gftRepository;
 	
+	@Autowired
+	TecnologiaRepository tecnologiaRepository;
+	
+	@Autowired
+	VagaTecnologiaRepository vagaTecnologiaRepository;
+	
+	@Autowired
+	FuncionarioTecRepository funcionarioTecRepository;
 	
 		@PostConstruct	
 		public void saveFuncionario(){
@@ -122,5 +136,62 @@ public class DummyData {
 				Funcionario funcionarioSaved = funcionarioRepository.save(funcionario);
 				System.out.println(funcionarioSaved.getId());
 			}	
+	
+			List<Tecnologia> tecnologiaList = new ArrayList<>();
+			
+			Tecnologia tecnologia1 = new Tecnologia();
+			tecnologia1.setNome("Java");
+			
+			Tecnologia tecnologia2 = new Tecnologia();
+			tecnologia2.setNome("C#");
+			
+			Tecnologia tecnologia3 = new Tecnologia();
+			tecnologia3.setNome("AWS");
+			
+			tecnologiaList.add(tecnologia1);
+			tecnologiaList.add(tecnologia2);
+			tecnologiaList.add(tecnologia3);
+			
+			for(Tecnologia tecnologia : tecnologiaList) {
+				Tecnologia tecnologiaSaved = tecnologiaRepository.save(tecnologia);
+				System.out.println(tecnologiaSaved.getId());
+			}
+
+			List<VagaTecnologia> vagaTecnologiaList = new ArrayList<>();
+			
+			VagaTecnologia vagaTecnologia1 = new VagaTecnologia();
+			vagaTecnologia1.setTecnologia(tecnologia1);
+			vagaTecnologia1.setVaga(vaga1);
+			
+			vagaTecnologiaList.add(vagaTecnologia1);
+			
+			for(VagaTecnologia vagaTecnologia : vagaTecnologiaList) {
+				VagaTecnologia vagaTecnologiaSaved = vagaTecnologiaRepository.save(vagaTecnologia);
+				System.out.println(vagaTecnologiaSaved.getId());
+			}
+			
+			List<FuncionarioTecnologia> funcionarioTecnologiaList = new ArrayList<>();
+						
+			FuncionarioTecnologia funcionarioTecnologia1 = new FuncionarioTecnologia();
+			funcionarioTecnologia1.setFuncionario(funcionario1);
+			funcionarioTecnologia1.setTecnologia(tecnologia1);
+			
+			FuncionarioTecnologia funcionarioTecnologia2 = new FuncionarioTecnologia();
+			funcionarioTecnologia2.setFuncionario(funcionario2);
+			funcionarioTecnologia2.setTecnologia(tecnologia2);
+			
+			FuncionarioTecnologia funcionarioTecnologia3 = new FuncionarioTecnologia();
+			funcionarioTecnologia3.setFuncionario(funcionario3);
+			funcionarioTecnologia3.setTecnologia(tecnologia3);
+			
+			funcionarioTecnologiaList.add(funcionarioTecnologia1);
+			funcionarioTecnologiaList.add(funcionarioTecnologia2);
+			funcionarioTecnologiaList.add(funcionarioTecnologia3);
+			
+			for(FuncionarioTecnologia funcionarioTecnologia : funcionarioTecnologiaList) {
+				FuncionarioTecnologia funcionarioTecnologiaSaved = funcionarioTecRepository.save(funcionarioTecnologia);
+				System.out.println(funcionarioTecnologiaSaved.getId());
+			}
+								
 		}
 }

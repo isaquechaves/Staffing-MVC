@@ -1,16 +1,23 @@
 package br.com.gft.staffing.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 @Table(name ="TB_FUNCIONARIO")
@@ -20,14 +27,17 @@ public class Funcionario {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@NotBlank
+	@NotBlank(message = "Cargo é obrigatório")
+	@Size(max = 60, message = "Cargo não pode conter mais de 60 caracteres")
 	private String cargo;
 	
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@NotNull(message="Data de início WA é obrigatória")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate inicio_wa;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@NotNull(message="Data de vencimento WA é obrigatória")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate termino_wa;
 	
 	@NotBlank
@@ -38,6 +48,23 @@ public class Funcionario {
 	
 	@ManyToOne
 	private Gft gft;
+	
+	@ManyToMany
+	@JoinTable(name = "tb_funcionario_tecnologia",
+		joinColumns = @JoinColumn(name = "funcionario_id"),
+		inverseJoinColumns = @JoinColumn(name = "tecnologia_id"))
+	private List<Tecnologia> tecnologias;
+		
+	
+
+
+	public List<Tecnologia> getTecnologias() {
+		return tecnologias;
+	}
+
+	public void setTecnologias(List<Tecnologia> tecnologias) {
+		this.tecnologias = tecnologias;
+	}
 
 	public Vaga getVaga() {
 		return vaga;

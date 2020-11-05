@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.gft.staffing.model.Funcionario;
 import br.com.gft.staffing.repository.FuncionarioRepository;
 import br.com.gft.staffing.service.FuncionarioService;
+import br.com.gft.staffing.service.filter.FuncionarioFilter;
 
 @Service
 public class FuncionarioImpl implements FuncionarioService {
@@ -28,6 +29,12 @@ public class FuncionarioImpl implements FuncionarioService {
 	@Override
 	public Funcionario save(Funcionario funcionario) {
 		return funcionarioRepository.save(funcionario);
+	}
+
+	@Override
+	public List<Funcionario> filtrar(FuncionarioFilter filtro) {
+		String nome = filtro.getNome() == null ? "" : filtro.getNome();
+		return funcionarioRepository.findByNomeContaining(nome);
 	}
 	
 }

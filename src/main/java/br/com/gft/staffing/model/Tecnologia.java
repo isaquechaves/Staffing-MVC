@@ -1,9 +1,12 @@
 package br.com.gft.staffing.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -18,6 +21,8 @@ public class Tecnologia {
 	@NotBlank
 	private String nome;
 	
+	@ManyToMany(mappedBy = "tecnologias")
+	private List<Funcionario> funcionarios;
 	
 	public Long getId() {
 		return id;

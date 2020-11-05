@@ -10,13 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.gft.staffing.model.Funcionario;
-import br.com.gft.staffing.model.FuncionarioTecnologia;
 import br.com.gft.staffing.model.Gft;
 import br.com.gft.staffing.model.Tecnologia;
 import br.com.gft.staffing.model.Vaga;
 import br.com.gft.staffing.model.VagaTecnologia;
 import br.com.gft.staffing.repository.FuncionarioRepository;
-import br.com.gft.staffing.repository.FuncionarioTecRepository;
 import br.com.gft.staffing.repository.GftRepository;
 import br.com.gft.staffing.repository.TecnologiaRepository;
 import br.com.gft.staffing.repository.VagaRepository;
@@ -40,9 +38,7 @@ public class DummyData {
 	
 	@Autowired
 	VagaTecnologiaRepository vagaTecnologiaRepository;
-	
-	@Autowired
-	FuncionarioTecRepository funcionarioTecRepository;
+
 	
 		@PostConstruct	
 		public void saveFuncionario(){
@@ -100,44 +96,7 @@ public class DummyData {
 				System.out.println(vagaSaved.getId());
 			}	
 						
-			
-			List<Funcionario> funcionarioList = new ArrayList<>();
-			
-			
-			Funcionario funcionario1 = new Funcionario();
-			funcionario1.setCargo("Desenvolvedor Back-end");
-			funcionario1.setInicio_wa(LocalDate.now());
-			funcionario1.setTermino_wa(LocalDate.now().plusDays(15));
-			funcionario1.setNome("João Pedro");	
-			funcionario1.setGft(gft1);
-			funcionario1.setVaga(vaga2);
-			
-			Funcionario funcionario2 = new Funcionario();
-			funcionario2.setCargo("Desenvolvedor Front-end");
-			funcionario2.setInicio_wa(LocalDate.now());
-			funcionario2.setTermino_wa(LocalDate.now().plusDays(15));
-			funcionario2.setNome("Maria Fernanda");
-			funcionario2.setGft(gft1);
-			funcionario2.setVaga(vaga2);
-			
-			Funcionario funcionario3 = new Funcionario();
-			funcionario3.setCargo("Scrum Master");
-			funcionario3.setInicio_wa(LocalDate.now());
-			funcionario3.setTermino_wa(LocalDate.now().plusDays(15));
-			funcionario3.setNome("Lara Dias");
-			funcionario3.setGft(gft2);
-			funcionario3.setVaga(vaga1);
-			
-			funcionarioList.add(funcionario1);
-			funcionarioList.add(funcionario2);
-			funcionarioList.add(funcionario3);
-			
-			for(Funcionario funcionario : funcionarioList) {
-				Funcionario funcionarioSaved = funcionarioRepository.save(funcionario);
-				System.out.println(funcionarioSaved.getId());
-			}	
-	
-			List<Tecnologia> tecnologiaList = new ArrayList<>();
+	List<Tecnologia> tecnologiaList = new ArrayList<>();
 			
 			Tecnologia tecnologia1 = new Tecnologia();
 			tecnologia1.setNome("Java");
@@ -169,29 +128,45 @@ public class DummyData {
 				VagaTecnologia vagaTecnologiaSaved = vagaTecnologiaRepository.save(vagaTecnologia);
 				System.out.println(vagaTecnologiaSaved.getId());
 			}
-			
-			List<FuncionarioTecnologia> funcionarioTecnologiaList = new ArrayList<>();
 						
-			FuncionarioTecnologia funcionarioTecnologia1 = new FuncionarioTecnologia();
-			funcionarioTecnologia1.setFuncionario(funcionario1);
-			funcionarioTecnologia1.setTecnologia(tecnologia1);
+				
 			
-			FuncionarioTecnologia funcionarioTecnologia2 = new FuncionarioTecnologia();
-			funcionarioTecnologia2.setFuncionario(funcionario2);
-			funcionarioTecnologia2.setTecnologia(tecnologia2);
+			List<Funcionario> funcionarioList = new ArrayList<>();
 			
-			FuncionarioTecnologia funcionarioTecnologia3 = new FuncionarioTecnologia();
-			funcionarioTecnologia3.setFuncionario(funcionario3);
-			funcionarioTecnologia3.setTecnologia(tecnologia3);
 			
-			funcionarioTecnologiaList.add(funcionarioTecnologia1);
-			funcionarioTecnologiaList.add(funcionarioTecnologia2);
-			funcionarioTecnologiaList.add(funcionarioTecnologia3);
+			Funcionario funcionario1 = new Funcionario();
+			funcionario1.setCargo("Desenvolvedor Back-end");
+			funcionario1.setInicio_wa(LocalDate.now());
+			funcionario1.setTermino_wa(LocalDate.now().plusDays(15));
+			funcionario1.setNome("João Pedro");	
+			funcionario1.setGft(gft1);
+			funcionario1.setVaga(vaga2);
+			funcionario1.setTecnologias(tecnologiaList);	
 			
-			for(FuncionarioTecnologia funcionarioTecnologia : funcionarioTecnologiaList) {
-				FuncionarioTecnologia funcionarioTecnologiaSaved = funcionarioTecRepository.save(funcionarioTecnologia);
-				System.out.println(funcionarioTecnologiaSaved.getId());
-			}
-								
+			Funcionario funcionario2 = new Funcionario();
+			funcionario2.setCargo("Desenvolvedor Front-end");
+			funcionario2.setInicio_wa(LocalDate.now());
+			funcionario2.setTermino_wa(LocalDate.now().plusDays(15));
+			funcionario2.setNome("Maria Fernanda");
+			funcionario2.setGft(gft1);
+			funcionario2.setVaga(vaga2);
+			
+			Funcionario funcionario3 = new Funcionario();
+			funcionario3.setCargo("Scrum Master");
+			funcionario3.setInicio_wa(LocalDate.now());
+			funcionario3.setTermino_wa(LocalDate.now().plusDays(15));
+			funcionario3.setNome("Lara Dias");
+			funcionario3.setGft(gft2);
+			funcionario3.setVaga(vaga1);
+			
+			funcionarioList.add(funcionario1);
+			funcionarioList.add(funcionario2);
+			funcionarioList.add(funcionario3);
+			
+			for(Funcionario funcionario : funcionarioList) {
+				Funcionario funcionarioSaved = funcionarioRepository.save(funcionario);
+				System.out.println(funcionarioSaved.getId());
+			}	
+	
 		}
 }

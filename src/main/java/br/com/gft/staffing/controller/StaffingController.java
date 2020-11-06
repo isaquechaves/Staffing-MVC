@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.gft.staffing.model.Funcionario;
+import br.com.gft.staffing.model.Gft;
+import br.com.gft.staffing.repository.FuncionarioRepository;
 import br.com.gft.staffing.service.FuncionarioService;
 import br.com.gft.staffing.service.GftService;
 import br.com.gft.staffing.service.TecnologiaService;
@@ -20,6 +22,10 @@ import br.com.gft.staffing.service.filter.FuncionarioFilter;
 @Controller
 @RequestMapping("/wa")
 public class StaffingController {
+	
+	
+	@Autowired
+	FuncionarioRepository funcionarioRepository;
 	
 	@Autowired
 	FuncionarioService funcionarioService;
@@ -36,24 +42,30 @@ public class StaffingController {
 	@Autowired
 	VagaTecnologiaService vagaTecnologiaService;
 		
-	
-	
-	@RequestMapping(value = "/funcionarios", method = RequestMethod.GET)
-	public ModelAndView getFuncionarios(){
-	
-		ModelAndView mv = new ModelAndView("funcionarios");
-		List<Funcionario> funcionarios = funcionarioService.findAll();				
-		mv.addObject("funcionarios", funcionarios);		
-		mv.addObject("tecnologias", tecnologiaService.findAll());
+	@RequestMapping("/funcionarios/cadastrar")
+	public ModelAndView cadastro(@ModelAttribute("gft") Gft gft) {
+		ModelAndView mv = new ModelAndView("cadastrar");
+		List<Gft> gfts = gftService.findAll();
+		mv.addObject(gfts);
+		mv.addObject(new Funcionario());
 		return mv;
 	}
-	@RequestMapping()
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public String salvar(Funcionario funcionario) {			
+				
+		funcionarioService.save(funcionario);		
+		return "funcionarios";
+		
+	}
+	
+	@RequestMapping("/funcionarios")
 	public ModelAndView pesquisar(@ModelAttribute("filtro")FuncionarioFilter filtro )
 	{
 		List<Funcionario> funcionarios = funcionarioService.filtrar(filtro);
-		ModelAndView mv = new ModelAndView("Pesquisatitulos");
-		mv.addObject("filtro", new FuncionarioFilter());
-		mv.addObject("titulos", funcionarios);
+		ModelAndView mv = new ModelAndView("funcionarios");
+		mv.addObject("funcionarios", funcionarios);
 		return mv;
 	}
+
 }

@@ -96,7 +96,7 @@ public class DummyData {
 				System.out.println(vagaSaved.getId());
 			}	
 						
-	List<Tecnologia> tecnologiaList = new ArrayList<>();
+			List<Tecnologia> tecnologiaList = new ArrayList<>();
 			
 			Tecnologia tecnologia1 = new Tecnologia();
 			tecnologia1.setNome("Java");
@@ -111,7 +111,28 @@ public class DummyData {
 			tecnologiaList.add(tecnologia2);
 			tecnologiaList.add(tecnologia3);
 			
+			
+			
+			List<Tecnologia> tecnologiaList2 = new ArrayList<>();
+			
+			Tecnologia tecnologia4 = new Tecnologia();
+			tecnologia4.setNome("Java");
+			
+			Tecnologia tecnologia5 = new Tecnologia();
+			tecnologia5.setNome("MySQL");
+			
+					
+			tecnologiaList2.add(tecnologia4);
+			tecnologiaList2.add(tecnologia5);
+		
+			
+			
 			for(Tecnologia tecnologia : tecnologiaList) {
+				Tecnologia tecnologiaSaved = tecnologiaRepository.save(tecnologia);
+				System.out.println(tecnologiaSaved.getId());
+			}
+			
+			for(Tecnologia tecnologia : tecnologiaList2) {
 				Tecnologia tecnologiaSaved = tecnologiaRepository.save(tecnologia);
 				System.out.println(tecnologiaSaved.getId());
 			}
@@ -135,7 +156,7 @@ public class DummyData {
 			
 			
 			Funcionario funcionario1 = new Funcionario();
-			funcionario1.setCargo("Desenvolvedor Back-end");
+			funcionario1.setCargo("Desenvolvedor Backend");
 			funcionario1.setInicio_wa(LocalDate.now());
 			funcionario1.setTermino_wa(LocalDate.now().plusDays(15));
 			funcionario1.setNome("João Pedro");	
@@ -144,12 +165,13 @@ public class DummyData {
 			funcionario1.setTecnologias(tecnologiaList);	
 			
 			Funcionario funcionario2 = new Funcionario();
-			funcionario2.setCargo("Desenvolvedor Front-end");
+			funcionario2.setCargo("Desenvolvedor Frontend");
 			funcionario2.setInicio_wa(LocalDate.now());
 			funcionario2.setTermino_wa(LocalDate.now().plusDays(15));
 			funcionario2.setNome("Maria Fernanda");
 			funcionario2.setGft(gft1);
 			funcionario2.setVaga(vaga2);
+			funcionario2.setTecnologias(tecnologiaList2);
 			
 			Funcionario funcionario3 = new Funcionario();
 			funcionario3.setCargo("Scrum Master");
@@ -158,6 +180,7 @@ public class DummyData {
 			funcionario3.setNome("Lara Dias");
 			funcionario3.setGft(gft2);
 			funcionario3.setVaga(vaga1);
+			funcionario3.setTecnologias(tecnologiaList);
 			
 			funcionarioList.add(funcionario1);
 			funcionarioList.add(funcionario2);

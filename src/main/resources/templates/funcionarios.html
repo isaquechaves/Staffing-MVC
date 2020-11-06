@@ -47,11 +47,11 @@
 			</div>
 			
 			<div class="panel-body">	
-				<form method="GET" action="/funcionarios" th:object="${filtro}">
+				<form method="GET" action="/wa/funcionarios" th:object="${filtro}">
 					<div class="form-group row col-sm-4">
 						<div class="input-group mb-2">
 						 <input class="form-control" placeholder="Pesquisar funcionário" 
-						 autofocus="autofocus"></input>
+						 autofocus="autofocus" th:field="*{nome}"></input>
 						 <span class = "input-group-btn>">
 						 	<button type="submit" class="btn btn-outline-dark">
 						 		<img src="/images/search.png" height="15" width="15"/>
@@ -68,7 +68,8 @@
 						<th class="text-center col-md1">#</th> 							
 						<th class="text-center col-md1">Nome</th>
 						<th class="text-center col-md1">Tecnologias</th>
- 						<th class="text-center col-md1">Cargo</th> 							
+ 						<th class="text-center col-md1">Cargo</th> 		
+ 						<th class="text-center col-md1">GFT</th> 							
  						<th class="text-center col-md1">Início WA</th> 							
  						<th class="text-center col-md1">Término WA</th>  										 					 						
  					</tr>
@@ -77,10 +78,17 @@
  					<tr th:each="funcionario :${funcionarios}">
  						<td class="text-center" th:text="${funcionario.id}"></td>
  						<td class="text-center" th:text="${funcionario.nome}"></td> 	
- 						 							
- 						<td class="text-center" th:text="${{funcionario.tecnologias}}"></td> 				 						 					
- 						
+ 						 						 						
+ 						<td class="text-center">
+ 							<span  th:each="tecnologia : ${funcionario.tecnologias}"> 								
+ 								
+ 								<span th:text="${tecnologia.nome}"></span> 		
+ 												 								
+ 							</span>
+ 						</td> 		 						 					
+ 					
  						<td class="text-center" th:text="${funcionario.cargo}"></td>
+ 						<td class="text-center" th:text="${funcionario.gft.nome}"></td>
  						<td class="text-center" th:text="${{funcionario.inicio_wa}}"></td>
  						<td class="text-center" th:text="${{funcionario.termino_wa}}"></td> 																					 					
  					</tr>

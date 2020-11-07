@@ -40,7 +40,7 @@
 	</header>
 
 	<section>
-		<form method="POST" action="/wa" th:object="${gfts}">
+		<form method="POST" action="/wa">
 			
 			<div class ="card">
 				<div class = "card-header">
@@ -58,20 +58,26 @@
 						</div>
 					</div>
 					
-					<div class="form-group row">
-						<label for="tecnologias" class="col-sm-2 col-form-label">Tecnologias</label>
-						<select class="col-sm-2">
-							<option th:each="tecnologia :${tecnologias}" th:value="${tecnologia.id}" th:text="tecnologia.nome"/>							
-						</select>
-						
+					<div class="form-group row" th:object="${tecnologias}">
+						<label for="tecnologia" class="col-sm-2 col-form-label">Tecnologias</label>
+						<div class="col-sm-4" >
+							<select  class="col-sm-4"  name="tecnologias"  th:each="tecnologia :${tecnologias}" >
+								<option th:each="tecnologia :${tecnologias}" 
+									th:value="${tecnologia.id}" th:text="${tecnologia.nome}" 						
+									/></option>
+							</select>
+						</div>
 					</div>	
 					
-					<div class="form-group row" >
+					<div class="form-group row"  th:object="${gfts}" >
 						<label for="gft" class="col-sm-2 col-form-label">GFT</label>
-						<select class="col-sm-2">
-							<option th:each="gft : ${gfts}" th:value="${gft}"  th:text="${gft.nome}"/></option>						
-						</select>
-						
+						<div class="col-sm-6" >
+							<select class="col-sm-6" name="gft">
+								<option th:each="gft : ${gfts}" 
+									th:value="${gft.id}"  th:text="${gft.nome}" 
+									/></option>						
+							</select>
+						</div>
 					</div>	
 					
 					<div class="form-group row" >

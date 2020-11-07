@@ -1,9 +1,13 @@
 package br.com.gft.staffing.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
@@ -30,8 +34,24 @@ public class Vaga {
 	
 	@NotBlank
 	private String projeto;
+	
+	@ManyToMany
+	@JoinTable(name = "tb_vaga_tecnologia",
+			joinColumns = @JoinColumn(name = "vaga_id"),
+			inverseJoinColumns  = @JoinColumn(name = "tecnologia_id"))
+	private List<Tecnologia> tecnologias;
 		
 	private int qtd_vaga;
+
+	
+	
+	public List<Tecnologia> getTecnologias() {
+		return tecnologias;
+	}
+
+	public void setTecnologias(List<Tecnologia> tecnologias) {
+		this.tecnologias = tecnologias;
+	}
 
 	public Long getId() {
 		return Id;

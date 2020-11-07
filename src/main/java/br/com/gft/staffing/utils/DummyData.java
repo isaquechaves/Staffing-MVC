@@ -13,12 +13,11 @@ import br.com.gft.staffing.model.Funcionario;
 import br.com.gft.staffing.model.Gft;
 import br.com.gft.staffing.model.Tecnologia;
 import br.com.gft.staffing.model.Vaga;
-import br.com.gft.staffing.model.VagaTecnologia;
 import br.com.gft.staffing.repository.FuncionarioRepository;
 import br.com.gft.staffing.repository.GftRepository;
 import br.com.gft.staffing.repository.TecnologiaRepository;
 import br.com.gft.staffing.repository.VagaRepository;
-import br.com.gft.staffing.repository.VagaTecnologiaRepository;
+
 
 
 @Component
@@ -35,9 +34,6 @@ public class DummyData {
 	
 	@Autowired
 	TecnologiaRepository tecnologiaRepository;
-	
-	@Autowired
-	VagaTecnologiaRepository vagaTecnologiaRepository;
 
 	
 		@PostConstruct	
@@ -70,31 +66,7 @@ public class DummyData {
 				System.out.println(gftSaved.getId());
 			}	
 		
-			
-			
-			List<Vaga> vagaList = new ArrayList<>();
-			
-			Vaga vaga1 = new Vaga();		
-			vaga1.setAbertura_vaga(LocalDate.now());
-			vaga1.setCodigo_vaga("Itau_12");
-			vaga1.setDescricao_vaga("Desenvolvedor back-end Java");
-			vaga1.setProjeto("Itaú pix");
-			vaga1.setQtd_vaga(1);
-			
-			Vaga vaga2 = new Vaga();
-			vaga2.setAbertura_vaga(LocalDate.now());
-			vaga2.setCodigo_vaga("Itau_12");
-			vaga2.setDescricao_vaga("Desenvolvedor back-end Java");
-			vaga2.setProjeto("Itaú pix");
-			vaga2.setQtd_vaga(2);
-			
-			vagaList.add(vaga1);
-			vagaList.add(vaga2);
-			
-			for(Vaga vaga : vagaList) {
-				Vaga vagaSaved = vagaRepository.save(vaga);
-				System.out.println(vagaSaved.getId());
-			}	
+									
 						
 			List<Tecnologia> tecnologiaList = new ArrayList<>();
 			
@@ -135,22 +107,33 @@ public class DummyData {
 			for(Tecnologia tecnologia : tecnologiaList2) {
 				Tecnologia tecnologiaSaved = tecnologiaRepository.save(tecnologia);
 				System.out.println(tecnologiaSaved.getId());
-			}
-
-			List<VagaTecnologia> vagaTecnologiaList = new ArrayList<>();
-			
-			VagaTecnologia vagaTecnologia1 = new VagaTecnologia();
-			vagaTecnologia1.setTecnologia(tecnologia1);
-			vagaTecnologia1.setVaga(vaga1);
-			
-			vagaTecnologiaList.add(vagaTecnologia1);
-			
-			for(VagaTecnologia vagaTecnologia : vagaTecnologiaList) {
-				VagaTecnologia vagaTecnologiaSaved = vagaTecnologiaRepository.save(vagaTecnologia);
-				System.out.println(vagaTecnologiaSaved.getId());
-			}
-						
+			}		
 				
+			List<Vaga> vagaList = new ArrayList<>();
+			
+			Vaga vaga1 = new Vaga();		
+			vaga1.setAbertura_vaga(LocalDate.now());
+			vaga1.setCodigo_vaga("Itau_12");
+			vaga1.setDescricao_vaga("Desenvolvedor back-end Java");
+			vaga1.setProjeto("Itaú pix");
+			vaga1.setQtd_vaga(1);
+			vaga1.setTecnologias(tecnologiaList);
+			
+			Vaga vaga2 = new Vaga();
+			vaga2.setAbertura_vaga(LocalDate.now());
+			vaga2.setCodigo_vaga("Itau_12");
+			vaga2.setDescricao_vaga("Desenvolvedor back-end Java");
+			vaga2.setProjeto("Itaú pix");
+			vaga2.setQtd_vaga(2);
+			vaga2.setTecnologias(tecnologiaList2);
+			
+			vagaList.add(vaga1);
+			vagaList.add(vaga2);
+			
+			for(Vaga vaga : vagaList) {
+				Vaga vagaSaved = vagaRepository.save(vaga);
+				System.out.println(vagaSaved.getId());
+			}	
 			
 			List<Funcionario> funcionarioList = new ArrayList<>();
 			
@@ -160,8 +143,7 @@ public class DummyData {
 			funcionario1.setInicio_wa(LocalDate.now());
 			funcionario1.setTermino_wa(LocalDate.now().plusDays(15));
 			funcionario1.setNome("João Pedro");	
-			funcionario1.setGft(gft1);
-			funcionario1.setVaga(vaga2);
+			funcionario1.setGft(gft1);			
 			funcionario1.setTecnologias(tecnologiaList);	
 			
 			Funcionario funcionario2 = new Funcionario();
@@ -171,15 +153,14 @@ public class DummyData {
 			funcionario2.setNome("Maria Fernanda");
 			funcionario2.setGft(gft1);
 			funcionario2.setVaga(vaga2);
-			funcionario2.setTecnologias(tecnologiaList2);
+			funcionario2.setTecnologias(tecnologiaList2);			
 			
 			Funcionario funcionario3 = new Funcionario();
 			funcionario3.setCargo("Scrum Master");
 			funcionario3.setInicio_wa(LocalDate.now());
 			funcionario3.setTermino_wa(LocalDate.now().plusDays(15));
 			funcionario3.setNome("Lara Dias");
-			funcionario3.setGft(gft2);
-			funcionario3.setVaga(vaga1);
+			funcionario3.setGft(gft2);			
 			funcionario3.setTecnologias(tecnologiaList);
 			
 			funcionarioList.add(funcionario1);

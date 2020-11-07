@@ -75,7 +75,7 @@
  					</tr>
  				</thead>
  				<tbody>
- 					<tr th:each="funcionario :${funcionarios}">
+ 					<tr th:each="funcionario :${funcionarios}" th:if="${funcionario.vaga} == null">
  						<td class="text-center" th:text="${funcionario.id}"></td>
  						<td class="text-center" th:text="${funcionario.nome}"></td> 	
  						 						 						

@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.gft.staffing.model.Funcionario;
 import br.com.gft.staffing.model.Gft;
 import br.com.gft.staffing.model.Tecnologia;
+import br.com.gft.staffing.model.Vaga;
 import br.com.gft.staffing.repository.FuncionarioRepository;
 import br.com.gft.staffing.repository.GftRepository;
 import br.com.gft.staffing.repository.TecnologiaRepository;
@@ -77,6 +78,15 @@ public class StaffingController {
 		
 		ModelAndView mv = new ModelAndView("funcionarios");
 		mv.addObject("funcionarios", funcionarios);
+		return mv;
+	}
+	
+	@RequestMapping("vagas")
+	public ModelAndView pesquisarVagas()
+	{
+		List<Vaga> vagas = vagaService.findAll();
+		ModelAndView mv = new ModelAndView("vagas");
+		mv.addObject("vagas", vagas);
 		return mv;
 	}
 

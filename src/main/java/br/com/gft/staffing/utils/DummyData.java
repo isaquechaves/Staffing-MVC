@@ -70,27 +70,32 @@ public class DummyData {
 						
 			List<Tecnologia> tecnologiaList = new ArrayList<>();
 			
+			
 			Tecnologia tecnologia1 = new Tecnologia();
-			tecnologia1.setNome("Java");
+			tecnologia1.setNome("C#");
 			
 			Tecnologia tecnologia2 = new Tecnologia();
-			tecnologia2.setNome("C#");
+			tecnologia2.setNome("AWS");							
+			
 			
 			Tecnologia tecnologia3 = new Tecnologia();
-			tecnologia3.setNome("AWS");							
-			
-			Tecnologia tecnologia4 = new Tecnologia();
-			tecnologia4.setNome("C");
-			
-			Tecnologia tecnologia5 = new Tecnologia();
-			tecnologia5.setNome("MySQL");
+			tecnologia3.setNome("MySQL");
 			
 			tecnologiaList.add(tecnologia1);
 			tecnologiaList.add(tecnologia2);
-			tecnologiaList.add(tecnologia3);					
-			tecnologiaList.add(tecnologia4);
-			tecnologiaList.add(tecnologia5);
-		
+			tecnologiaList.add(tecnologia3);								
+			
+			List<Tecnologia> tecnologiaList2 = new ArrayList<>();
+			
+			Tecnologia tecnologia4 = new Tecnologia();
+			tecnologia4.setNome("Java");
+						
+			Tecnologia tecnologia5 = new Tecnologia();
+			tecnologia5.setNome("Angular");			
+			
+			
+			tecnologiaList2.add(tecnologia4);
+			tecnologiaList2.add(tecnologia5);
 			
 			
 			for(Tecnologia tecnologia : tecnologiaList) {
@@ -98,6 +103,10 @@ public class DummyData {
 				System.out.println(tecnologiaSaved.getId());
 			}
 			
+			for(Tecnologia tecnologia : tecnologiaList2) {
+				Tecnologia tecnologiaSaved = tecnologiaRepository.save(tecnologia);
+				System.out.println(tecnologiaSaved.getId());
+			}
 				
 				
 			List<Vaga> vagaList = new ArrayList<>();
@@ -116,7 +125,7 @@ public class DummyData {
 			vaga2.setDescricao_vaga("Desenvolvedor back-end Java");
 			vaga2.setProjeto("Itaú pix");
 			vaga2.setQtd_vaga(2);
-			vaga2.setTecnologias(tecnologiaList);
+			vaga2.setTecnologias(tecnologiaList2);
 			
 			vagaList.add(vaga1);
 			vagaList.add(vaga2);
@@ -152,7 +161,7 @@ public class DummyData {
 			funcionario3.setTermino_wa(LocalDate.now().plusDays(15));
 			funcionario3.setNome("Lara Dias");
 			funcionario3.setGft(gft2);			
-			funcionario3.setTecnologias(tecnologiaList);
+			funcionario3.setTecnologias(tecnologiaList2);
 			
 			funcionarioList.add(funcionario1);
 			funcionarioList.add(funcionario2);

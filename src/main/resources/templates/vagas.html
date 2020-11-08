@@ -6,7 +6,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Funcionários em WA</title>
+	<title>Vagas</title>
 	
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
@@ -38,20 +38,20 @@
 			</div>	
 		</nav>
 	</header>
-
+	
 	<section>
 		<div class="card" style="padding-bottom: 30px; padding-left: 30px; padding-right: 30px;">
 			<div class = "card-header">
-					<h3 class="card-title float-left">Pesquisa de funcionários</h3>
-					<a class ="btn btn-outline-success float-right"  href="/wa/funcionarios/cadastrar" role="button">Cadastrar funcionário</a>		
+					<h3 class="card-title float-left">Pesquisa de Vagas</h3>
+					<a class ="btn btn-outline-success float-right"  href="/wa/vagas/cadastrar" role="button">Cadastrar vaga</a>		
 			</div>
 			
 			<div class="panel-body">	
-				<form method="GET" action="/wa/funcionarios" th:object="${filtro}">
+				<form method="GET" action="/wa/funcionarios" th:object="${vagas}">
 					<div class="form-group row col-sm-4">
 						<div class="input-group mb-2">
-						 <input class="form-control" placeholder="Pesquisar funcionário" 
-						 autofocus="autofocus" th:field="*{nome}"></input>
+						 <input class="form-control" placeholder="Pesquisar vaga" 
+						 autofocus="autofocus"></input>
 						 <span class = "input-group-btn>">
 						 	<button type="submit" class="btn btn-outline-dark">
 						 		<img src="/images/search.png" height="15" width="15"/>
@@ -66,38 +66,19 @@
  				<thead class="thead-dark">
  					<tr>
 						<th class="text-center col-md1">#</th> 							
-						<th class="text-center col-md1">Nome</th>
-						<th class="text-center col-md1">Tecnologias</th>
- 						<th class="text-center col-md1">Cargo</th> 		
- 						<th class="text-center col-md1">GFT</th> 							
- 						<th class="text-center col-md1">Início WA</th> 							
- 						<th class="text-center col-md1">Término WA</th>  										 					 						
+						<th class="text-center col-md1">Descrição</th>
+						<th class="text-center col-md1">Código Vaga</th>
+ 					 										 					 					
  					</tr>
  				</thead>
  				<tbody>
- 					<tr th:each="funcionario :${funcionarios}" th:if="${funcionario.vaga} == null">
- 						<td class="text-center" th:text="${funcionario.id}"></td>
- 						<td class="text-center" th:text="${funcionario.nome}"></td> 	
- 						 						 						
- 						<td class="text-center">
- 							<span  th:each="tecnologia : ${funcionario.tecnologias}"> 								 								
- 								<div th:switch="${tecnologia.nome}" style="display: inline-block;"> 									 									 							
-	 								<img th:case="'Java'" th:src="@{/images/java.png}" >
-	 								<img th:case="'C#'" th:src="@{/images/csharp.png}">
-	 								<img th:case="'AWS'" th:src="@{/images/aws.png}">
-	 								<img th:case="'Angular'" th:src="@{/images/angular.png}" >
-	 								<img th:case="'MySQL'" th:src="@{/images/mySQL.png}">	 								
- 								</div>					 								
- 							</span>
- 						</td> 		 						 					
- 					
- 						<td class="text-center" th:text="${funcionario.cargo}"></td>
- 						<td class="text-center" th:text="${funcionario.gft.nome}"></td>
- 						<td class="text-center" th:text="${{funcionario.inicio_wa}}"></td>
- 						<td class="text-center" th:text="${{funcionario.termino_wa}}"></td> 																					 					
+ 					<tr th:each="vaga :${vagas}" th:if="${vaga.qtd_vaga} > 0">
+ 						<td class="text-center" th:text="${vaga.id}"></td>
+ 						<td class="text-center" th:text="${vaga.descricao_vaga}"></td>
+ 						<td class="text-center" th:text="${vaga.codigo_vaga}"></td> 	 						 						 						 					 																					 				
  					</tr>
  					<tr>
- 						<td colspan="6" th:if="${#lists.isEmpty(funcionarios)}">nenhum funcionário foi encontrado!</td>
+ 						<td colspan="6" th:if="${#lists.isEmpty(vagas)}">nenhuma vaga foi encontrada!</td>
  					</tr>
  					
  				</tbody>
@@ -105,6 +86,7 @@
 			
 		</div>
 	</section>
-
+	
+	
 </body>
 </html>

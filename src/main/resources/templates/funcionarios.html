@@ -81,9 +81,15 @@
  						 						 						
  						<td class="text-center">
  							<span  th:each="tecnologia : ${funcionario.tecnologias}"> 								
+ 								<div th:switch="${tecnologia.nome}">
  								
- 								<span th:text="${tecnologia.nome}"></span> 		
- 												 								
+	 									
+	 								<img th:case="'Java'" th:src="@{/images/java.jpg}"  width="40" height="40" >
+	 								<img th:case="'C#'" th:src="@{/images/c#.jpg}"  width="25" height="25" >
+	 								<img th:case="'AWS'" th:src="@{/images/aws.png}" >
+	 								<img th:case="'C'" th:src="@{/images/c.jpg}"  width="25" height="25" >
+	 								<img th:case="'MySQL'" th:src="@{/images/mySQL.jpg}"  width="25" height="25" >	 								
+ 								</div>					 								
  							</span>
  						</td> 		 						 					
  					

@@ -77,25 +77,19 @@ public class DummyData {
 			tecnologia2.setNome("C#");
 			
 			Tecnologia tecnologia3 = new Tecnologia();
-			tecnologia3.setNome("AWS");
-			
-			tecnologiaList.add(tecnologia1);
-			tecnologiaList.add(tecnologia2);
-			tecnologiaList.add(tecnologia3);
-			
-			
-			
-			List<Tecnologia> tecnologiaList2 = new ArrayList<>();
+			tecnologia3.setNome("AWS");							
 			
 			Tecnologia tecnologia4 = new Tecnologia();
-			tecnologia4.setNome("Java");
+			tecnologia4.setNome("C");
 			
 			Tecnologia tecnologia5 = new Tecnologia();
 			tecnologia5.setNome("MySQL");
 			
-					
-			tecnologiaList2.add(tecnologia4);
-			tecnologiaList2.add(tecnologia5);
+			tecnologiaList.add(tecnologia1);
+			tecnologiaList.add(tecnologia2);
+			tecnologiaList.add(tecnologia3);					
+			tecnologiaList.add(tecnologia4);
+			tecnologiaList.add(tecnologia5);
 		
 			
 			
@@ -104,10 +98,7 @@ public class DummyData {
 				System.out.println(tecnologiaSaved.getId());
 			}
 			
-			for(Tecnologia tecnologia : tecnologiaList2) {
-				Tecnologia tecnologiaSaved = tecnologiaRepository.save(tecnologia);
-				System.out.println(tecnologiaSaved.getId());
-			}		
+				
 				
 			List<Vaga> vagaList = new ArrayList<>();
 			
@@ -125,7 +116,7 @@ public class DummyData {
 			vaga2.setDescricao_vaga("Desenvolvedor back-end Java");
 			vaga2.setProjeto("Itaú pix");
 			vaga2.setQtd_vaga(2);
-			vaga2.setTecnologias(tecnologiaList2);
+			vaga2.setTecnologias(tecnologiaList);
 			
 			vagaList.add(vaga1);
 			vagaList.add(vaga2);
@@ -153,7 +144,7 @@ public class DummyData {
 			funcionario2.setNome("Maria Fernanda");
 			funcionario2.setGft(gft1);
 			funcionario2.setVaga(vaga2);
-			funcionario2.setTecnologias(tecnologiaList2);			
+			funcionario2.setTecnologias(tecnologiaList);			
 			
 			Funcionario funcionario3 = new Funcionario();
 			funcionario3.setCargo("Scrum Master");

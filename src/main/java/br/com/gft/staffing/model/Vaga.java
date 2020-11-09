@@ -26,11 +26,12 @@ public class Vaga {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long Id;
 	
-	@NotNull(message="Data de abertura da vaga é obrigatória")
+	@NotNull(message="Data de abertura é obrigatória")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate aberturaVaga;
 	
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@NotBlank(message = "Código é obrigatório")
+	@Size(max = 10, message = "Código não pode conter mais de 10 caracteres")
 	private String codigoVaga;
 	
 	@NotBlank(message = "Descrição é obrigatório")

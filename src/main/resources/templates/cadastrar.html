@@ -2,7 +2,8 @@
 
 <html xmlns ="http://www.w3.org./1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{Layout}">
 
 <head>
 	<meta charset="UTF-8">
@@ -14,38 +15,13 @@
 
 <body>
 
-	<header>
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		 <a class="navbar-brand" href="/wa/funcionarios">
-   			<img src="/images/logo.jpg" width="250" height="40" class="d-inline-block align-top" alt="GFT" >   
-  		</a>
-		  <a class="navbar-brand" href="/wa/funcionarios">Gerenciamento de WA</a> 
-			  <div class="navbar-brand">
-			  	<ul class="navbar-nav nav-tabs">    
-				      <li class="nav-item active">
-				        <a class="nav-link" href="/wa/funcionarios">Funcionários</a>
-				      </li>
-				      <li class="nav-item active">
-				        <a class="nav-link" href="/wa/vagas">Vagas</a>
-				      </li>
-				      <li class="nav-item active">
-				        <a class="nav-link" href="#">Alocação</a>
-				      </li>
-				       <li class="nav-item active my-2 my-sm-0">
-				        <a class="nav-link" href="#">Histórico</a>
-				      </li>		      
-				</ul>
-			</div>	
-		</nav>
-	</header>
-
-	<section>
+	<section layout:fragment="conteudo">
 		<form method="POST" action="/wa">
 			
 			<div class ="card">
 				<div class = "card-header">
 					<h4 class="card-title float-left">Novo Funcionário</h4>
-					<a class ="btn btn-outline-warning float-right"  href="/wa/funcionarios" role="button">Voltar</a>
+					<a class ="btn btn-warning float-right"  href="/wa/funcionarios" role="button">Cancelar</a>
 				</div>
 				
 				<div class="panel-body" style="padding-left: 10px; padding-right: 10px; padding-top: 10px;  padding-top: 20px;">
@@ -61,13 +37,10 @@
 					<div class="form-group row" th:object="${tecnologias}">
 						<label for="tecnologia" class="col-sm-2 col-form-label">Tecnologias</label>											
 							<div class="col-sm-10">
-								<div class="form-check"  th:each="tecnologia :${tecnologias}" style="display: inline-block;">				
-											
+								<div class="form-check"  th:each="tecnologia :${tecnologias}" style="display: inline-block;">															
 									<input class="form-check-input" type="checkbox" name="tecnologias"
-									 th:value="${tecnologia.id}"
-									 >
-									 <label class="form-check-label" th:text="${tecnologia.nome}"></label>						
-									  							  													
+									 th:value="${tecnologia.id}">
+									 <label class="form-check-label" th:text="${tecnologia.nome}"></label>															  							  													
 								</div>
 							</div>
 					</div>	
@@ -77,8 +50,7 @@
 						<div class="col-sm-6" >
 							<select class="col-sm-4" name="gft">
 								<option th:each="gft : ${gfts}" 
-									th:value="${gft.id}"  th:text="${gft.nome}" 
-									/></option>						
+									th:value="${gft.id}"  th:text="${gft.nome}"/></option>						
 							</select>
 						</div>
 					</div>	
@@ -146,8 +118,8 @@
 						<div class="col-md-3">
 							<button type="submit" class="btn btn-outline-success">Salvar</button>
 						</div>
+						</div>
 					</div>
-				</div>
 			</div>
 		</form>	
 	</section>

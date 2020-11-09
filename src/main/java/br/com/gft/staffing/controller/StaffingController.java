@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -68,7 +69,7 @@ public class StaffingController {
 	public String salvar(Funcionario funcionario) {			
 				
 		funcionarioService.save(funcionario);		
-		return "funcionarios";
+		return "redirect:/wa/funcionarios";
 		
 	}
 	
@@ -92,4 +93,42 @@ public class StaffingController {
 		return mv;
 	}
 
+	
+	@RequestMapping(value = "/vagas/cadastrar", method = RequestMethod.GET)
+	public ModelAndView vagasCadastrar(@ModelAttribute("gft") Gft gft, @ModelAttribute("tecnologia") Tecnologia tecnologia) {
+		ModelAndView mv = new ModelAndView("cadastrarVaga");
+		
+		List<Gft> gfts = gftService.findAll();
+		List<Tecnologia> tecnologias = tecnologiaService.findAll();
+		
+		mv.addObject("tecnologias", tecnologias);
+		mv.addObject("gfts", gfts);
+		mv.addObject(new Vaga());
+		
+		return mv;
+	}
+	
+	@RequestMapping("/vagas/cadastrar/{id}")
+	public ModelAndView edicao(@PathVariable("id") Long idVaga) {
+		
+		ModelAndView mv = new ModelAndView("cadastrarVaga");
+				
+		Vaga vaga = vagaService.findById(idVaga);
+		
+		List<Tecnologia> tecnologias = tecnologiaService.findAll();							
+
+		mv.addObject(tecnologias);
+		mv.addObject(vaga);
+		
+		return mv;
+		
+	}
+	
+	@RequestMapping(value = "/vagas/cadastrar", method = RequestMethod.POST)
+	public String salvar(Vaga vaga) {			
+				
+		vagaService.save(vaga);		
+		return "redirect:/wa/vagas";
+		
+	}
 }

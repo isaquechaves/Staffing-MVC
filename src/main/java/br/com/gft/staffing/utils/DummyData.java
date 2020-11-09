@@ -135,6 +135,11 @@ public class DummyData {
 			vaga3.setQtd_vaga(0);
 			vaga3.setTecnologias(tecnologiaList2);
 			
+			System.out.println(vaga3.getAbertura_vaga());
+			System.out.println(vaga1.getAbertura_vaga());
+			System.out.println(vaga2.getAbertura_vaga());
+			
+			
 			vagaList.add(vaga1);
 			vagaList.add(vaga2);
 			vagaList.add(vaga3);

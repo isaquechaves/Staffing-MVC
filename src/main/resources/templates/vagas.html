@@ -14,7 +14,6 @@
 </head>
 
 <body>
-
 	
 	<section layout:fragment="conteudo">
 	
@@ -48,8 +47,9 @@
 						<th class="text-center col-md1">Projeto</th>	
 						<th class="text-center col-md1">Tecnologias</th>					
 						<th class="text-center col-md1">Quantidade</th>
-						<th class="text-center col-md1">Abertura</th>
+						<th class="text-center col-md2">Abertura</th>
 						<th class="text-center col-md1">Código Vaga</th>
+						<th class="text-center col-md1">Alterar</th>
 						
  					 										 					 					
  					</tr>
@@ -68,10 +68,17 @@
 	 								<img th:case="'MySQL'" th:src="@{/images/mySQL.png}">	 								
  								</div> 							
  							</span>
- 						</td>	 								 	
- 						<td class="text-center" th:text="${{vaga.abertura_vaga}}"></td>								
- 						<td class="text-center" th:text="${vaga.qtd_vaga}"></td>  						
- 						<td class="text-center" th:text="${vaga.codigo_vaga}"></td> 	 						 						 						 					 																					 				
+ 						</td>	 								 	 						
+ 													
+ 						<td class="text-center" th:text="${vaga.qtd_vaga}"></td>
+ 						<td class="text-center" th:text="${{vaga.abertura_vaga}}"></td>	  						
+ 						<td class="text-center" th:text="${vaga.codigo_vaga}"></td> 
+ 						<td class="text-center">
+ 							<a class="btn btn-outline-warning btn-sm" th:href="@{/wa/vagas/cadastrar/{id}(id=${vaga.id})}" 
+ 								title="Editar" rel="tooltip" data-placement="top">
+								<img src="/images/pencil.png" height="15" width="15" />
+							</a> 	
+						</td>	 						 						 						 					 																					 				
  					</tr>
  					<tr>
  						<td colspan="6" th:if="${#lists.isEmpty(vagas)}">nenhuma vaga foi encontrada!</td>

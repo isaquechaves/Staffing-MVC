@@ -12,8 +12,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 @Table(name = "TB_VAGA")
@@ -23,16 +26,19 @@ public class Vaga {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long Id;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-	private LocalDate abertura_vaga;
+	@NotNull(message="Data de abertura da vaga é obrigatória")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private LocalDate aberturaVaga;
 	
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String codigo_vaga;
+	private String codigoVaga;
 	
-	@NotBlank
-	private String descricao_vaga;
+	@NotBlank(message = "Descrição é obrigatório")
+	@Size(max = 60, message = "Descrição não pode conter mais de 60 caracteres")
+	private String descricaoVaga;
 	
-	@NotBlank
+	@NotBlank(message = "Projeto é obrigatório")
+	@Size(max = 60, message = "Projeto não pode conter mais de 60 caracteres")
 	private String projeto;
 	
 	@ManyToMany
@@ -41,7 +47,7 @@ public class Vaga {
 			inverseJoinColumns  = @JoinColumn(name = "tecnologia_id"))
 	private List<Tecnologia> tecnologias;
 		
-	private int qtd_vaga;
+	private int qtdVaga;
 
 	
 	
@@ -62,27 +68,27 @@ public class Vaga {
 	}
 
 	public LocalDate getAbertura_vaga() {
-		return abertura_vaga;
+		return aberturaVaga;
 	}
 
 	public void setAbertura_vaga(LocalDate abertura_vaga) {
-		this.abertura_vaga = abertura_vaga;
+		this.aberturaVaga = abertura_vaga;
 	}
 
 	public String getCodigo_vaga() {
-		return codigo_vaga;
+		return codigoVaga;
 	}
 
 	public void setCodigo_vaga(String codigo_vaga) {
-		this.codigo_vaga = codigo_vaga;
+		this.codigoVaga = codigo_vaga;
 	}
 
 	public String getDescricao_vaga() {
-		return descricao_vaga;
+		return descricaoVaga;
 	}
 
 	public void setDescricao_vaga(String descricao_vaga) {
-		this.descricao_vaga = descricao_vaga;
+		this.descricaoVaga = descricao_vaga;
 	}
 
 	public String getProjeto() {
@@ -94,11 +100,11 @@ public class Vaga {
 	}
 
 	public int getQtd_vaga() {
-		return qtd_vaga;
+		return qtdVaga;
 	}
 
 	public void setQtd_vaga(int qtd_vaga) {
-		this.qtd_vaga = qtd_vaga;
+		this.qtdVaga = qtd_vaga;
 	}
 	
 	

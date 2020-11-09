@@ -6,10 +6,10 @@ import br.com.gft.staffing.model.Funcionario;
 import br.com.gft.staffing.service.filter.FuncionarioFilter;
 
 public interface FuncionarioService {
+
 	List<Funcionario> findAll();
 	Funcionario findById(Long id);
 	Funcionario save(Funcionario funcionario);
 	List<Funcionario> filtrar(FuncionarioFilter filtro);
-
 
 }

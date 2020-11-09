@@ -40,7 +40,8 @@ public class Funcionario {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate termino_wa;
 	
-	@NotBlank
+	@NotBlank(message = "Nome é obrigatório")
+	@Size(max = 100, message = "Nome não pode conter mais de 100 caracteres")
 	private String nome;
 	
 	@ManyToOne

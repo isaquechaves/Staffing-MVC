@@ -21,6 +21,7 @@ import br.com.gft.staffing.service.GftService;
 import br.com.gft.staffing.service.TecnologiaService;
 import br.com.gft.staffing.service.VagaService;
 import br.com.gft.staffing.service.filter.FuncionarioFilter;
+import br.com.gft.staffing.service.filter.VagaFilter;
 
 @Controller
 @RequestMapping("/wa")
@@ -81,10 +82,11 @@ public class StaffingController {
 		return mv;
 	}
 	
-	@RequestMapping("vagas")
-	public ModelAndView pesquisarVagas()
+	@RequestMapping("/vagas")
+	public ModelAndView pesquisarVagas(@ModelAttribute("filtro")VagaFilter filtro)
 	{
-		List<Vaga> vagas = vagaService.findAll();
+		List<Vaga> vagas = vagaService.filtrar(filtro);
+		
 		ModelAndView mv = new ModelAndView("vagas");
 		mv.addObject("vagas", vagas);
 		return mv;

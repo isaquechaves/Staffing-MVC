@@ -114,21 +114,30 @@ public class DummyData {
 			Vaga vaga1 = new Vaga();		
 			vaga1.setAbertura_vaga(LocalDate.now());
 			vaga1.setCodigo_vaga("Itau_12");
-			vaga1.setDescricao_vaga("Desenvolvedor back-end Java");
+			vaga1.setDescricao_vaga("Desenvolvedor Java");
 			vaga1.setProjeto("Itaú pix");
 			vaga1.setQtd_vaga(1);
 			vaga1.setTecnologias(tecnologiaList);
 			
 			Vaga vaga2 = new Vaga();
 			vaga2.setAbertura_vaga(LocalDate.now());
-			vaga2.setCodigo_vaga("Itau_12");
-			vaga2.setDescricao_vaga("Desenvolvedor back-end Java");
-			vaga2.setProjeto("Itaú pix");
+			vaga2.setCodigo_vaga("SAN01");
+			vaga2.setDescricao_vaga("Desenvolvedor C#");
+			vaga2.setProjeto("Santander");
 			vaga2.setQtd_vaga(2);
 			vaga2.setTecnologias(tecnologiaList2);
 			
+			Vaga vaga3 = new Vaga();
+			vaga3.setAbertura_vaga(LocalDate.now());
+			vaga3.setCodigo_vaga("Itau_13");
+			vaga3.setDescricao_vaga("Desenvolvedor backend Java");
+			vaga3.setProjeto("Itaú pix");
+			vaga3.setQtd_vaga(0);
+			vaga3.setTecnologias(tecnologiaList2);
+			
 			vagaList.add(vaga1);
 			vagaList.add(vaga2);
+			vagaList.add(vaga3);
 			
 			for(Vaga vaga : vagaList) {
 				Vaga vagaSaved = vagaRepository.save(vaga);

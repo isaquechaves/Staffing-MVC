@@ -17,6 +17,7 @@
 
 	<section layout:fragment="conteudo">
 		<form method="POST" action="/wa/vagas/cadastrar" th:object="${vaga}">
+			<input type="hidden" th:field="*{id}">
 			<div class ="card">
 				<div class = "card-header">
 					<h4 class="card-title float-left">Nova Vaga</h4>
@@ -39,19 +40,19 @@
 							<input type="text" class="form-control" id="projeto" th:field="*{projeto}"/>
 						</div>
 					</div>
-					
+						
 					<div class="form-group row" th:object="${tecnologias}">
 						<label for="tecnologia" class="col-sm-2 col-form-label">Tecnologias</label>											
-							<div class="col-sm-10">
-								<div class="form-check"  th:each="tecnologia :${vaga.tecnologias}" style="display: inline-block;">															
-									<input class="form-check-input" type="checkbox" name="${tecnologias}"
-										 th:value="${tecnologia.id}">
-									 <label class="form-check-label" th:text="${tecnologia.nome}"></label>															  							  												
+							<div class="col-sm-10">								
+								<div class="form-check"  th:each="tecnologia :${tecnologias}" style="display: inline-block;">															
+									<input class="form-check-input" type="checkbox" name="tecnologias"
+									 	th:value="${tecnologia.id}">
+									 <label class="form-check-label" th:text="${tecnologia.nome}"></label>															  							  													
 								</div>
 							</div>
 					</div>
 							
-																			
+																		
 					<div class="form-group row" >
 						<label for="inicio_wa" class="col-sm-2 col-form-label">Código Vaga</label>
 						<div class="col-sm-4">

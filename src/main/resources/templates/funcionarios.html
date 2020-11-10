@@ -46,7 +46,8 @@
  						<th class="text-center col-md1">Cargo</th> 		
  						<th class="text-center col-md1">GFT</th> 							
  						<th class="text-center col-md1">Início WA</th> 							
- 						<th class="text-center col-md1">Término WA</th>  										 					 						
+ 						<th class="text-center col-md1">Término WA</th>
+ 						<th class="text-center col-md1">Alterar</th>  										 					 						
  					</tr>
  				</thead>
  				<tbody>
@@ -69,7 +70,18 @@
  						<td class="text-center" th:text="${funcionario.cargo}"></td>
  						<td class="text-center" th:text="${funcionario.gft.nome}"></td>
  						<td class="text-center" th:text="${{funcionario.inicio_wa}}"></td>
- 						<td class="text-center" th:text="${{funcionario.termino_wa}}"></td> 																					 					
+ 						<td class="text-center" th:text="${{funcionario.termino_wa}}"></td> 
+ 						<td class="text-center">
+ 							<a class="btn btn-outline-warning btn-sm" th:href="@{/wa/funcionarios/cadastrar/{id}(id=${funcionario.id})}" 
+ 								title="Editar" rel="tooltip" data-placement="top">
+								<img src="/images/pencil.png" height="15" width="15" />
+							</a> 	
+							<a class="btn btn-outline-success btn-sm" th:href="@{/wa/alocacao/{id}(id=${funcionario.id})}" 
+ 								title="Editar" rel="tooltip" data-placement="top">
+								<img src="/images/pencil.png" height="15" width="15" />
+							</a> 
+						</td>	
+ 																											 				
  					</tr>
  					<tr>
  						<td colspan="6" th:if="${#lists.isEmpty(funcionarios)}">nenhum funcionário foi encontrado!</td>

@@ -17,6 +17,7 @@ import br.com.gft.staffing.model.Vaga;
 import br.com.gft.staffing.repository.FuncionarioRepository;
 import br.com.gft.staffing.repository.GftRepository;
 import br.com.gft.staffing.repository.TecnologiaRepository;
+import br.com.gft.staffing.repository.VagaRepository;
 import br.com.gft.staffing.service.FuncionarioService;
 import br.com.gft.staffing.service.GftService;
 import br.com.gft.staffing.service.TecnologiaService;
@@ -31,6 +32,9 @@ public class StaffingController {
 	
 	@Autowired
 	FuncionarioRepository funcionarioRepository;
+	
+	@Autowired
+	VagaRepository vagaRepository;
 	
 	@Autowired
 	GftRepository gftRepository;
@@ -63,6 +67,24 @@ public class StaffingController {
 		mv.addObject("gfts", gfts);
 		mv.addObject(new Funcionario());
 		return mv;
+	}
+	
+	@RequestMapping("/funcionarios/cadastrar/{id}")
+	public ModelAndView edicaoFuncionario(@PathVariable("id") Long idFuncionario) {
+		
+		ModelAndView mv = new ModelAndView("cadastrar");
+				
+		Funcionario funcionario = funcionarioRepository.getOne(idFuncionario);
+		List<Gft> gfts = gftService.findAll();
+		List<Tecnologia> tecnologias = tecnologiaService.findAll();							
+		
+		
+		mv.addObject("gfts", gfts);
+		mv.addObject("tecnologias", tecnologias);
+		mv.addObject(funcionario);
+		
+		return mv;
+		
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
@@ -113,11 +135,11 @@ public class StaffingController {
 		
 		ModelAndView mv = new ModelAndView("cadastrarVaga");
 				
-		Vaga vaga = vagaService.findById(idVaga);
+		Vaga vaga = vagaRepository.getOne(idVaga);
 		
 		List<Tecnologia> tecnologias = tecnologiaService.findAll();							
 
-		mv.addObject(tecnologias);
+		mv.addObject("tecnologias", tecnologias);
 		mv.addObject(vaga);
 		
 		return mv;
@@ -131,4 +153,29 @@ public class StaffingController {
 		return "redirect:/wa/vagas";
 		
 	}
+	
+	@RequestMapping("/alocacao/{id}")
+	public ModelAndView alocacao(@PathVariable("id") Long idFuncionario) {
+		
+		Funcionario funcionario = funcionarioRepository.getOne(idFuncionario);
+		
+		List<Vaga> vagas = vagaService.findAll();
+		
+		
+		ModelAndView mv = new ModelAndView("alocacao");
+		
+		mv.addObject("vagas", vagas);
+		mv.addObject(funcionario);
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/alocacao", method = RequestMethod.POST)
+	public String alocar(Funcionario funcionario) {			
+				
+		funcionarioService.save(funcionario);		
+		return "redirect:/wa/funcionarios";
+		
+	}
+	
 }

@@ -154,7 +154,7 @@ public class StaffingController {
 		
 	}
 	
-	@RequestMapping("/alocacao/{id}")
+	@RequestMapping(value = "/alocacao/{id}",  method = RequestMethod.GET)
 	public ModelAndView alocacao(@PathVariable("id") Long idFuncionario) {
 		
 		Funcionario funcionario = funcionarioRepository.getOne(idFuncionario);
@@ -164,6 +164,7 @@ public class StaffingController {
 		
 		ModelAndView mv = new ModelAndView("alocacao");
 		
+	
 		mv.addObject("vagas", vagas);
 		mv.addObject(funcionario);
 		
@@ -177,5 +178,6 @@ public class StaffingController {
 		return "redirect:/wa/funcionarios";
 		
 	}
+	
 	
 }

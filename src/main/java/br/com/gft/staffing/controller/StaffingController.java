@@ -3,6 +3,7 @@ package br.com.gft.staffing.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,6 +57,7 @@ public class StaffingController {
 	
 		
 	@RequestMapping("/funcionarios/cadastrar")
+	@PreAuthorize("hasRole('USER')")
 	public ModelAndView cadastro(@ModelAttribute("gft") Gft gft, @ModelAttribute("tecnologia") Tecnologia tecnologia) {
 		ModelAndView mv = new ModelAndView("cadastrar");
 		
@@ -70,6 +72,7 @@ public class StaffingController {
 	}
 	
 	@RequestMapping("/funcionarios/cadastrar/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ModelAndView edicaoFuncionario(@PathVariable("id") Long idFuncionario) {
 		
 		ModelAndView mv = new ModelAndView("cadastrar");
@@ -97,6 +100,7 @@ public class StaffingController {
 	}
 	
 	@RequestMapping("/funcionarios")
+	@PreAuthorize("hasRole('USER')")
 	public ModelAndView pesquisar(@ModelAttribute("filtro")FuncionarioFilter filtro )
 	{
 		List<Funcionario> funcionarios = funcionarioService.filtrar(filtro);
@@ -107,6 +111,7 @@ public class StaffingController {
 	}
 	
 	@RequestMapping("/historico")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ModelAndView pesquisarHistorico(@ModelAttribute("filtro")FuncionarioFilter filtro )
 	{
 		List<Funcionario> funcionarios = funcionarioService.filtrar(filtro);
@@ -117,6 +122,7 @@ public class StaffingController {
 	}
 	
 	@RequestMapping("/vagas")
+	@PreAuthorize("hasRole('USER')")
 	public ModelAndView pesquisarVagas(@ModelAttribute("filtro")VagaFilter filtro)
 	{
 		List<Vaga> vagas = vagaService.filtrar(filtro);
@@ -128,6 +134,7 @@ public class StaffingController {
 
 	
 	@RequestMapping(value = "/vagas/cadastrar", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('ADMIN')")
 	public ModelAndView vagasCadastrar(@ModelAttribute("gft") Gft gft, @ModelAttribute("tecnologia") Tecnologia tecnologia) {
 		ModelAndView mv = new ModelAndView("cadastrarVaga");
 		
@@ -142,6 +149,7 @@ public class StaffingController {
 	}
 	
 	@RequestMapping("/vagas/cadastrar/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ModelAndView edicao(@PathVariable("id") Long idVaga) {
 		
 		ModelAndView mv = new ModelAndView("cadastrarVaga");
@@ -158,6 +166,7 @@ public class StaffingController {
 	}
 	
 	@RequestMapping(value = "/vagas/cadastrar", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('ADMIN')")
 	public String salvar(Vaga vaga) {			
 				
 		vagaService.save(vaga);		
@@ -175,6 +184,7 @@ public class StaffingController {
 	}
 	
 	@RequestMapping(value = "/alocacao/{id}",  method = RequestMethod.GET)
+	@PreAuthorize("hasRole('ADMIN')")
 	public ModelAndView alocacao(@PathVariable("id") Long idFuncionario) {
 		
 		Funcionario funcionario = funcionarioRepository.getOne(idFuncionario);		
@@ -192,6 +202,7 @@ public class StaffingController {
 	}
 	
 	@RequestMapping(value = "/alocacao", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('ADMIN')")
 	public String alocar(Funcionario funcionario) {			
 		
 		funcionarioService.save(funcionario);		

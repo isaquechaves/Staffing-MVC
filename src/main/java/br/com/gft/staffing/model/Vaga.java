@@ -38,6 +38,10 @@ public class Vaga {
 	@Size(max = 60, message = "Descrição não pode conter mais de 60 caracteres")
 	private String descricaoVaga;
 	
+	@NotBlank(message = "Cliente é obrigatório")
+	@Size(max = 60, message = "Cliente não pode conter mais de 60 caracteres")
+	private String cliente;
+	
 	@NotBlank(message = "Projeto é obrigatório")
 	@Size(max = 60, message = "Projeto não pode conter mais de 60 caracteres")
 	private String projeto;
@@ -52,6 +56,14 @@ public class Vaga {
 
 	
 	
+	public String getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(String cliente) {
+		this.cliente = cliente;
+	}
+
 	public List<Tecnologia> getTecnologias() {
 		return tecnologias;
 	}

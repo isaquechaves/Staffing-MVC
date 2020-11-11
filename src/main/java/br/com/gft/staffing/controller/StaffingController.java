@@ -88,8 +88,9 @@ public class StaffingController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(Funcionario funcionario) {			
-				
+	public String salvar(Funcionario funcionario) {							
+		
+		funcionario.setTermino_wa(funcionario.getInicio_wa().plusDays(14));
 		funcionarioService.save(funcionario);		
 		return "redirect:/wa/funcionarios";
 		

@@ -114,6 +114,7 @@ public class DummyData {
 			Vaga vaga1 = new Vaga();		
 			vaga1.setAbertura_vaga(LocalDate.now());
 			vaga1.setCodigo_vaga("Itau_12");
+			vaga1.setCliente("Itaú");
 			vaga1.setDescricao_vaga("Desenvolvedor Java");
 			vaga1.setProjeto("Itaú pix");
 			vaga1.setQtd_vaga(1);
@@ -122,6 +123,7 @@ public class DummyData {
 			Vaga vaga2 = new Vaga();
 			vaga2.setAbertura_vaga(LocalDate.now());
 			vaga2.setCodigo_vaga("SAN01");
+			vaga2.setCliente("Santander");
 			vaga2.setDescricao_vaga("Desenvolvedor C#");
 			vaga2.setProjeto("Santander");
 			vaga2.setQtd_vaga(2);
@@ -130,6 +132,7 @@ public class DummyData {
 			Vaga vaga3 = new Vaga();
 			vaga3.setAbertura_vaga(LocalDate.now());
 			vaga3.setCodigo_vaga("Itau_13");
+			vaga3.setCliente("Itaú");
 			vaga3.setDescricao_vaga("Desenvolvedor backend Java");
 			vaga3.setProjeto("Itaú pix");
 			vaga3.setQtd_vaga(0);

@@ -44,7 +44,8 @@
  					<tr>
 													
 						<th class="text-center col-md1">Descrição</th>	
-						<th class="text-center col-md1">Projeto</th>	
+						<th class="text-center col-md1">Projeto</th>
+						<th class="text-center col-md1">Cliente</th>	
 						<th class="text-center col-md1">Tecnologias</th>					
 						<th class="text-center col-md1">Quantidade</th>
 						<th class="text-center col-md2">Abertura</th>
@@ -57,7 +58,8 @@
  				<tbody>
  					<tr th:each="vaga :${vagas}" th:if="${vaga.qtd_vaga} > 0"> 				
  						<td class="text-center" th:text="${vaga.descricao_vaga}"></td> 	
- 						<td class="text-center" th:text="${vaga.projeto}"></td> 	 						
+ 						<td class="text-center" th:text="${vaga.projeto}"></td>
+ 						<td class="text-center" th:text="${vaga.cliente}"></td> 	 						
  						<td class="text-center">
  							<span th:each="tecnologia : ${vaga.tecnologias}">
  								<div th:switch="${tecnologia.nome}" style="display: inline-block;"> 									 									 							

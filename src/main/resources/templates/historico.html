@@ -50,10 +50,10 @@
  				<tbody>
  					<tr th:each="funcionario :${funcionarios}" th:if="${funcionario.vaga} != null"> 						
  						<td class="text-center" th:text="${funcionario.nome}"></td> 
- 						<td class="text-center" th:text="${funcionario.vaga.codigo_vaga}"></td> 
+ 						<td class="text-center" th:text="${funcionario.vaga.cliente}"></td> 
  						<td class="text-center" th:text="${funcionario.vaga.codigo_vaga}"></td> 	 						 						 										 					 					 						
- 						<td class="text-center" th:text="${funcionario.inicio_wa}"></td> 
- 						<td class="text-center" th:text="${funcionario.inicio_alocacao}"></td>																 				
+ 						<td class="text-center" th:text="${{funcionario.inicio_wa}}"></td> 
+ 						<td class="text-center" th:text="${{funcionario.inicio_alocacao}}"></td>																 				
  					</tr>
  					<tr>
  						<td colspan="6" th:if="${#lists.isEmpty(funcionarios)}">nenhum funcionário foi encontrado!</td> 						

@@ -40,6 +40,13 @@
 							<input type="text" class="form-control" id="projeto" th:field="*{projeto}"/>
 						</div>
 					</div>
+					
+					<div class="form-group row" >
+						<label for="nome" class="col-sm-2 col-form-label">Cliente</label>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="cliente" th:field="*{cliente}"/>
+						</div>
+					</div>
 						
 					<div class="form-group row" th:object="${tecnologias}">
 						<label for="tecnologia" class="col-sm-2 col-form-label">Tecnologias</label>											
@@ -60,12 +67,16 @@
 						</div>
 					</div>
 							
-					<div class="form-group row" >
-						<label for="inicio_wa" class="col-sm-2 col-form-label">Data de abertura</label>
-						<div class="col-sm-4">
-							<input type="text" class="form-control" id="abertura_vaga" th:field="*{abertura_vaga}"/>
+					
+					<div class="form-group row">
+						<label for="Data WA" class="col-sm-2 control-label">Data de abertura</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="inicio_wa" th:field=*{abertura_vaga}
+								data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt_BR"
+								data-date-autoclose="true" data-date-today-highlight="true" data-orientation="bottom"/>
 						</div>
-					</div>	
+					</div>
+					
 					
 					<div class="form-group row" >
 						<label for="inicio_wa" class="col-sm-2 col-form-label">Quantidade</label>

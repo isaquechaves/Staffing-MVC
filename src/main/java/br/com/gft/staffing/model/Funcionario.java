@@ -38,7 +38,6 @@ public class Funcionario {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate inicio_wa;
 	
-	@NotNull(message="Data de vencimento WA é obrigatória")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate termino_wa;
 	

@@ -31,6 +31,8 @@ public class Funcionario {
 	@Size(max = 60, message = "Cargo não pode conter mais de 60 caracteres")
 	private String cargo;
 	
+	@NotBlank(message = "Level é obrigatório")
+	private String level;
 	
 	@NotNull(message="Data de início WA é obrigatória")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -40,9 +42,14 @@ public class Funcionario {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate termino_wa;
 	
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private LocalDate inicio_alocacao;
+	
 	@NotBlank(message = "Nome é obrigatório")
 	@Size(max = 100, message = "Nome não pode conter mais de 100 caracteres")
 	private String nome;
+	
 	
 	@ManyToOne
 	private Vaga vaga;
@@ -57,7 +64,23 @@ public class Funcionario {
 	private List<Tecnologia> tecnologias;
 		
 	
+	
+	
+	public String getLevel() {
+		return level;
+	}
 
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
+	public LocalDate getInicio_alocacao() {
+		return inicio_alocacao;
+	}
+
+	public void setInicio_alocacao(LocalDate inicio_alocacao) {
+		this.inicio_alocacao = inicio_alocacao;
+	}
 
 	public List<Tecnologia> getTecnologias() {
 		return tecnologias;

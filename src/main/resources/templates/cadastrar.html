@@ -34,6 +34,22 @@
 						</div>
 					</div>
 					
+					<div class="form-group row">
+				    <label for="Level" class="col-sm-2 col-form-label">Level</label>
+						<div class="col-sm-2">
+						    <select class="form-control" id="level" th:field="*{level}">
+							      <option th:value="L0" th:text="L0"></option>
+							      <option th:value="L1" th:text="L1"></option>
+							      <option th:value="L2" th:text="L2"></option>
+							      <option th:value="L3" th:text="L3"></option>
+							      <option th:value="L4" th:text="L4"></option>
+							      <option th:value="L5" th:text="L5"></option>
+							      <option th:value="L6" th:text="L6"></option>
+							      <option th:value="L7" th:text="L7"></option>
+					    	</select>
+					    </div>
+ 					</div>
+					
 					<div class="form-group row" th:object="${tecnologias}">
 						<label for="tecnologia" class="col-sm-2 col-form-label">Tecnologias</label>											
 							<div class="col-sm-10">

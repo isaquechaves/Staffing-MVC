@@ -105,6 +105,16 @@ public class StaffingController {
 		return mv;
 	}
 	
+	@RequestMapping("/historico")
+	public ModelAndView pesquisarHistorico(@ModelAttribute("filtro")FuncionarioFilter filtro )
+	{
+		List<Funcionario> funcionarios = funcionarioService.filtrar(filtro);
+		
+		ModelAndView mv = new ModelAndView("historico");
+		mv.addObject("funcionarios", funcionarios);
+		return mv;
+	}
+	
 	@RequestMapping("/vagas")
 	public ModelAndView pesquisarVagas(@ModelAttribute("filtro")VagaFilter filtro)
 	{
@@ -154,10 +164,19 @@ public class StaffingController {
 		
 	}
 	
+
+	@RequestMapping(value = "/alocacao")
+	public ModelAndView alocacao() {
+		
+		ModelAndView mv = new ModelAndView("alocacao");
+
+		return mv;
+	}
+	
 	@RequestMapping(value = "/alocacao/{id}",  method = RequestMethod.GET)
 	public ModelAndView alocacao(@PathVariable("id") Long idFuncionario) {
 		
-		Funcionario funcionario = funcionarioRepository.getOne(idFuncionario);
+		Funcionario funcionario = funcionarioRepository.getOne(idFuncionario);		
 		
 		List<Vaga> vagas = vagaService.findAll();
 		
@@ -173,11 +192,17 @@ public class StaffingController {
 	
 	@RequestMapping(value = "/alocacao", method = RequestMethod.POST)
 	public String alocar(Funcionario funcionario) {			
-				
+		
 		funcionarioService.save(funcionario);		
+		Long idVaga = funcionario.getVaga().getId();
+		System.out.println(idVaga);
+		
+		Vaga vaga = vagaRepository.getOne(idVaga);
+						
+		vaga.setQtd_vaga(vaga.getQtd_vaga()-1);
+		vagaService.save(vaga);
+		
 		return "redirect:/wa/funcionarios";
 		
 	}
-	
-	
 }

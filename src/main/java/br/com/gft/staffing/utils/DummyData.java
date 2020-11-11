@@ -157,6 +157,7 @@ public class DummyData {
 			funcionario1.setInicio_wa(LocalDate.now());
 			funcionario1.setTermino_wa(LocalDate.now().plusDays(15));
 			funcionario1.setNome("João Pedro");	
+			funcionario1.setLevel("L2");	
 			funcionario1.setGft(gft1);			
 			funcionario1.setTecnologias(tecnologiaList);	
 			
@@ -165,6 +166,8 @@ public class DummyData {
 			funcionario2.setInicio_wa(LocalDate.now());
 			funcionario2.setTermino_wa(LocalDate.now().plusDays(15));
 			funcionario2.setNome("Maria Fernanda");
+			funcionario2.setLevel("L3");
+			funcionario2.setInicio_alocacao(LocalDate.now());
 			funcionario2.setGft(gft1);
 			funcionario2.setVaga(vaga2);
 			funcionario2.setTecnologias(tecnologiaList);			
@@ -174,6 +177,7 @@ public class DummyData {
 			funcionario3.setInicio_wa(LocalDate.now());
 			funcionario3.setTermino_wa(LocalDate.now().plusDays(15));
 			funcionario3.setNome("Lara Dias");
+			funcionario3.setLevel("L0");
 			funcionario3.setGft(gft2);			
 			funcionario3.setTecnologias(tecnologiaList2);
 			

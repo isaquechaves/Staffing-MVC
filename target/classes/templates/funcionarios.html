@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+	xmlns ="http://www.w3.org./1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{Layout}">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Funcionários em WA</title>	
+
+</head>
+
+<body>
+
+	<section layout:fragment="conteudo">
+	
+		<div class="card" style="padding-bottom: 30px; padding-left: 30px; padding-right: 30px;">
+			<div class = "card-header">
+					<h3 class="card-title float-left">Pesquisa de funcionários</h3>
+					<a class ="btn btn-outline-success float-right"  href="/wa/funcionarios/cadastrar" role="button">Cadastrar funcionário</a>		
+			</div>
+			
+			<div class="panel-body">	
+				<form method="GET" action="/wa/funcionarios" th:object="${filtro}">
+					<div class="form-group row col-sm-4">
+						<div class="input-group mb-2">
+						 <input class="form-control" placeholder="Pesquisar funcionário" 
+						 autofocus="autofocus" th:field="*{nome}"></input>
+						 <span class = "input-group-btn>">
+						 	<button type="submit" class="btn btn-outline-dark">
+						 		<img src="/images/search.png" height="15" width="15"/>
+						 	</button>
+						 </span>
+						</div>
+					</div>
+				</form>
+			</div>
+			
+			<table class="table table-striped table-bordered">
+ 				<thead class="thead-dark">
+ 					<tr>
+						<th class="text-center col-md1">#</th> 							
+						<th class="text-center col-md1">Nome</th>
+						<th class="text-center col-md1">Tecnologias</th>
+ 						<th class="text-center col-md1">Cargo</th> 		
+ 						<th class="text-center col-md1">GFT</th> 							
+ 						<th class="text-center col-md1">Início WA</th> 							
+ 						<th class="text-center col-md1">Término WA</th>
+ 						<th class="text-center col-md1">Alterar</th>
+ 						<th class="text-center col-md1">Alocar</th>  										 					 						
+ 					</tr>
+ 				</thead>
+ 				<tbody>
+ 					<tr th:each="funcionario :${funcionarios}" th:if="${funcionario.vaga} == null">
+ 						<td class="text-center" th:text="${funcionario.id}"></td>
+ 						<td class="text-center" th:text="${funcionario.nome}"></td> 	
+ 						 						 						
+ 						<td class="text-center">
+ 							<span  th:each="tecnologia : ${funcionario.tecnologias}"> 								 								
+ 								<div th:switch="${tecnologia.nome}" style="display: inline-block;"> 									 									 							
+	 								<img th:case="'Java'" th:src="@{/images/java.png}" >
+	 								<img th:case="'C#'" th:src="@{/images/csharp.png}">
+	 								<img th:case="'AWS'" th:src="@{/images/aws.png}">
+	 								<img th:case="'Angular'" th:src="@{/images/angular.png}" >
+	 								<img th:case="'MySQL'" th:src="@{/images/mySQL.png}">	 								
+ 								</div>					 								
+ 							</span>
+ 						</td> 		 						 					
+ 					
+ 						<td class="text-center" th:text="${funcionario.cargo}"></td>
+ 						<td class="text-center" th:text="${funcionario.gft.nome}"></td>
+ 						<td class="text-center" th:text="${{funcionario.inicio_wa}}"></td>
+ 						<td class="text-center" th:text="${{funcionario.termino_wa}}"></td> 
+ 						<td class="text-center">
+ 							<a class="btn btn-outline-warning btn-sm" th:href="@{/wa/funcionarios/cadastrar/{id}(id=${funcionario.id})}" 
+ 								title="Editar" rel="tooltip" data-placement="top">
+								<img src="/images/pencil.png" height="15" width="15" />
+							</a> 								
+						</td>	
+						<td class="text-center">
+							<a class="btn btn-outline-success btn-sm" th:href="@{/wa/alocacao/{id}(id=${funcionario.id})}" 
+	 								title="Alocar" rel="tooltip" data-placement="top">
+									<img src="/images/alocar.png" height="15" width="15" />
+							</a> 
+						</td>					 																											 				
+ 					</tr>
+ 					<tr>
+ 						<td colspan="6" th:if="${#lists.isEmpty(funcionarios)}">nenhum funcionário foi encontrado!</td> 					
+ 					</tr>
+ 					
+ 				</tbody>
+ 			</table>
+			
+		</div>
+	</section>
+
+</body>
+</html>

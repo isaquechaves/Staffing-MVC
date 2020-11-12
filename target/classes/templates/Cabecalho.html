@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns ="http://www.w3.org./1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<meta charset ="UTF-8"/>
+<nav th:fragment="navbar"  class="navbar navbar-expand-lg navbar-light bg-light">
+		 <a class="navbar-brand" href="/wa/funcionarios">
+   			<img src="/images/logo.jpg" width="180" height="40" class="d-inline-block align-top" alt="GFT" >   
+  		</a>
+		  <a class="navbar-brand" href="/wa/funcionarios">Gerenciamento de WA</a> 
+			  <div class="navbar-brand">
+			  	<ul class="navbar-nav nav-tabs">    
+				      <li class="nav-item active">
+				        <a class="nav-link" href="/wa/funcionarios">Funcionários</a>
+				      </li>
+				      <li class="nav-item active">
+				        <a class="nav-link" href="/wa/vagas">Vagas</a>
+				      </li>				      
+				       <li class="nav-item active my-2 my-sm-0">
+				        <a class="nav-link" href="/wa/historico">Histórico</a>
+				      </li>
+				      <li class="nav-item active">
+				        <a class="nav-link" href="/wa/usuario/novo">Cadastrar Usuário</a>
+				      </li>		      
+				</ul>
+			</div>	
+	</nav>
+</html>

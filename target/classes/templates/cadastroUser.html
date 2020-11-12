@@ -1,0 +1,68 @@
+<html	 xmlns ="http://www.w3.org./1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{Layout}">
+	
+<head>
+	<meta charset="UTF-8">
+	<title>Cadastrar usuário</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+	
+</head>
+<body>
+	
+	<section layout:fragment="conteudo">
+		<div class="d-flex justify-content-center" style="padding-top: 10px;">
+		   <h1>Cadastro</h1>	
+		</div>		
+			<div class="d-flex justify-content-center" style="padding-top: 10px;">
+				<div class="card" style="width: 20rem;">
+					<form  action="/wa/usuarionovo" method='POST' th:object="${user}">
+						
+						<div class="d-flex justify-content-center" style="padding-top: 10px;">				   				     
+					        <div class="form-group row">
+						         <label for="usuario" class="col-sm-4 col-form-label">Nome: </label>
+						            <div class="col-sm-6">				             
+						           		<input type="text" class="form-control"  th:field="*{nome}">				
+					         		</div>         
+					         </div>
+				         </div>
+						
+						<div class="d-flex justify-content-center" style="padding-top: 10px;">				   				     
+					        <div class="form-group row">
+						         <label for="usuario" class="col-sm-4 col-form-label">Usuário: </label>
+						            <div class="col-sm-6">				             
+						           		<input type="text" class="form-control"  th:field="*{username}">				
+					         		</div>         
+					         </div>
+				         </div>
+				         <div class="d-flex justify-content-center">
+					         <div class="form-group row">					    	
+					    		<label for="inputPassword" class="col-sm-4 col-form-label">Senha:</label>
+						    	<div class="col-sm-6">						    	
+						      		<input type="password" class="form-control" th:field="*{password}">
+						    	</div>
+						    </div>
+					  	</div>	
+					  	 <div class="d-flex justify-content-center">
+					        <label for="inputPassword" class="col-sm-4 col-form-label">Permissão:</label>
+						 	<div class="col-sm-6">
+						    	<div class="form-check">
+									<input class="form-check-input" type="radio" name="exampleRadios" th:field="*{admin}" value="true" checked>
+									<label class="form-check-label">Administrador</label>
+								</div>
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="exampleRadios" th:field="*{admin}" value="false">
+									<label class="form-check-label" for="userId">Usuário</label>									   					    							    							      
+						    	</div>	
+						    </div>													    						    						
+					  	</div>	
+					  	<div class="d-flex justify-content-center" style="padding-bottom: 5px;">	
+					  		<button type="submit" class="btn btn-primary">Cadastrar</button>
+					  	</div>	        										  
+					</form>
+				</div>
+			</div>
+	</section>
+</body>
+</html>

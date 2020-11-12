@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.gft.staffing.model.Funcionario;
 import br.com.gft.staffing.model.Gft;
 import br.com.gft.staffing.model.Tecnologia;
+import br.com.gft.staffing.model.User;
 import br.com.gft.staffing.model.Vaga;
 import br.com.gft.staffing.repository.FuncionarioRepository;
 import br.com.gft.staffing.repository.GftRepository;
@@ -22,6 +25,7 @@ import br.com.gft.staffing.repository.VagaRepository;
 import br.com.gft.staffing.service.FuncionarioService;
 import br.com.gft.staffing.service.GftService;
 import br.com.gft.staffing.service.TecnologiaService;
+import br.com.gft.staffing.service.UserService;
 import br.com.gft.staffing.service.VagaService;
 import br.com.gft.staffing.service.filter.FuncionarioFilter;
 import br.com.gft.staffing.service.filter.VagaFilter;
@@ -50,13 +54,16 @@ public class StaffingController {
 	VagaService vagaService;
 	
 	@Autowired
+	UserService userService;
+	
+	@Autowired
 	GftService gftService;
 	
 	@Autowired
 	TecnologiaService tecnologiaService;
 	
 		
-	@RequestMapping("/funcionarios/cadastrar")
+	@GetMapping(path = "/funcionarios/cadastrar")
 	@PreAuthorize("hasRole('USER')")
 	public ModelAndView cadastro(@ModelAttribute("gft") Gft gft, @ModelAttribute("tecnologia") Tecnologia tecnologia) {
 		ModelAndView mv = new ModelAndView("cadastrar");
@@ -64,14 +71,13 @@ public class StaffingController {
 		List<Gft> gfts = gftService.findAll();
 		List<Tecnologia> tecnologias = tecnologiaService.findAll();
 		
-		
 		mv.addObject("tecnologias", tecnologias);
 		mv.addObject("gfts", gfts);
 		mv.addObject(new Funcionario());
 		return mv;
 	}
 	
-	@RequestMapping("/funcionarios/cadastrar/{id}")
+	@GetMapping(path = "/funcionarios/cadastrar/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ModelAndView edicaoFuncionario(@PathVariable("id") Long idFuncionario) {
 		
@@ -80,7 +86,6 @@ public class StaffingController {
 		Funcionario funcionario = funcionarioRepository.getOne(idFuncionario);
 		List<Gft> gfts = gftService.findAll();
 		List<Tecnologia> tecnologias = tecnologiaService.findAll();							
-		
 		
 		mv.addObject("gfts", gfts);
 		mv.addObject("tecnologias", tecnologias);
@@ -99,7 +104,7 @@ public class StaffingController {
 		
 	}
 	
-	@RequestMapping("/funcionarios")
+	@GetMapping(path = "/funcionarios")
 	@PreAuthorize("hasRole('USER')")
 	public ModelAndView pesquisar(@ModelAttribute("filtro")FuncionarioFilter filtro )
 	{
@@ -110,7 +115,7 @@ public class StaffingController {
 		return mv;
 	}
 	
-	@RequestMapping("/historico")
+	@GetMapping(path = "/historico")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ModelAndView pesquisarHistorico(@ModelAttribute("filtro")FuncionarioFilter filtro )
 	{
@@ -121,7 +126,33 @@ public class StaffingController {
 		return mv;
 	}
 	
-	@RequestMapping("/vagas")
+	@RequestMapping(value = "/usuario/novo", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('ADMIN')")
+	public ModelAndView login() {
+		ModelAndView mv = new ModelAndView("cadastroUser");
+		
+		mv.addObject(new User());
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/usuarionovo", method = RequestMethod.POST)
+	@PreAuthorize("hasRole('ADMIN')")
+	public String salvar(User user) {			
+		
+		String pass = user.getPassword();	
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String cripto = passwordEncoder.encode(pass);
+		user.setPassword(cripto);
+		
+		userService.save(user);		
+		return "redirect:/wa/funcionarios";
+		
+	}
+	
+	
+	
+	@GetMapping(path = "/vagas")
 	@PreAuthorize("hasRole('USER')")
 	public ModelAndView pesquisarVagas(@ModelAttribute("filtro")VagaFilter filtro)
 	{
@@ -136,6 +167,7 @@ public class StaffingController {
 	@RequestMapping(value = "/vagas/cadastrar", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('ADMIN')")
 	public ModelAndView vagasCadastrar(@ModelAttribute("gft") Gft gft, @ModelAttribute("tecnologia") Tecnologia tecnologia) {
+		
 		ModelAndView mv = new ModelAndView("cadastrarVaga");
 		
 		List<Gft> gfts = gftService.findAll();
@@ -148,7 +180,7 @@ public class StaffingController {
 		return mv;
 	}
 	
-	@RequestMapping("/vagas/cadastrar/{id}")
+	@GetMapping(path = "/vagas/cadastrar/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ModelAndView edicao(@PathVariable("id") Long idVaga) {
 		

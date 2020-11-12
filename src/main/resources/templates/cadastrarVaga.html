@@ -16,83 +16,97 @@
 <body>
 
 	<section layout:fragment="conteudo">
-		<form method="POST" action="/wa/vagas/cadastrar" th:object="${vaga}">
-			<input type="hidden" th:field="*{id}">
-			<div class ="card">
-				<div class = "card-header">
-					<h4 class="card-title float-left">Nova Vaga</h4>
-					<a class ="btn btn-warning float-right"  href="/wa/funcionarios" role="button">Cancelar</a>
-				</div>
-				
-				<div class="panel-body" style="padding-left: 10px; padding-right: 10px; padding-top: 10px;  padding-top: 20px;">
-		
-					
-					<div class="form-group row" >
-						<label for="nome" class="col-sm-2 col-form-label">Descrição</label>
-						<div class="col-sm-4">
-							<input type="text" class="form-control" id="descricao_vaga" th:field="*{descricao_vaga}"/>
-						</div>
+		<div class="d-flex justify-content-center">	
+			<form method="POST" action="/wa/vagas/cadastrar" th:object="${vaga}">
+				<input type="hidden" th:field="*{id}">
+				<div class ="card" style="width: 30rem;">
+					<div class = "card-header">
+						<h4 class="card-title float-left">Nova Vaga</h4>
+						<a class ="btn btn-warning float-right"  href="/wa/funcionarios" role="button">Cancelar</a>
 					</div>
 					
-					<div class="form-group row" >
-						<label for="nome" class="col-sm-2 col-form-label">Projeto</label>
-						<div class="col-sm-4">
-							<input type="text" class="form-control" id="projeto" th:field="*{projeto}"/>
-						</div>
-					</div>
-					
-					<div class="form-group row" >
-						<label for="nome" class="col-sm-2 col-form-label">Cliente</label>
-						<div class="col-sm-4">
-							<input type="text" class="form-control" id="cliente" th:field="*{cliente}"/>
-						</div>
-					</div>
-						
-					<div class="form-group row" th:object="${tecnologias}">
-						<label for="tecnologia" class="col-sm-2 col-form-label">Tecnologias</label>											
-							<div class="col-sm-10">								
-								<div class="form-check"  th:each="tecnologia :${tecnologias}" style="display: inline-block;">															
-									<input class="form-check-input" type="checkbox" name="tecnologias"
-									 	th:value="${tecnologia.id}">
-									 <label class="form-check-label" th:text="${tecnologia.nome}"></label>															  							  													
+					<div class="panel-body" style="padding-left: 10px; padding-right: 10px; padding-top: 10px;  padding-top: 20px;">
+			
+						<div class="d-flex justify-content-center">
+							<div class="form-group row" >
+								<label for="nome" class="col-sm-4 col-form-label">Descrição</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" id="descricao_vaga" th:field="*{descricao_vaga}"/>
 								</div>
 							</div>
-					</div>
-							
-																		
-					<div class="form-group row" >
-						<label for="inicio_wa" class="col-sm-2 col-form-label">Código Vaga</label>
-						<div class="col-sm-4">
-							<input type="text" class="form-control" id="codigo_vaga" th:field="*{codigo_vaga}"/>
 						</div>
-					</div>
-							
-					
-					<div class="form-group row">
-						<label for="Data WA" class="col-sm-2 control-label">Data de abertura</label>
-						<div class="col-sm-2">
-							<input type="text" class="form-control" id="inicio_wa" th:field=*{abertura_vaga}
-								data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt_BR"
-								data-date-autoclose="true" data-date-today-highlight="true" data-orientation="bottom"/>
-						</div>
-					</div>
-					
-					
-					<div class="form-group row" >
-						<label for="inicio_wa" class="col-sm-2 col-form-label">Quantidade</label>
-						<div class="col-sm-4">
-							<input type="text" class="form-control" id="qtd_vaga" th:field="*{qtd_vaga}"/>
-						</div>
-					</div>	
-					
-					<div class="form-group row">
-							<div class="col-md-3">
-								<button type="submit" class="btn btn-outline-success">Salvar</button>
+						<div class="d-flex justify-content-center">
+							<div class="form-group row" >
+								<label for="nome" class="col-sm-4 col-form-label">Projeto</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" id="projeto" th:field="*{projeto}"/>
+								</div>
 							</div>
-					</div>
-				</div>	
-			</div>
-		</form>	
+						</div>
+						<div class="d-flex justify-content-center">	
+							<div class="form-group row" >
+								<label for="nome" class="col-sm-4 col-form-label">Cliente</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" id="cliente" th:field="*{cliente}"/>
+								</div>
+							</div>
+						</div>
+						
+								
+							<div class="form-group row" th:object="${tecnologias}">
+							<div class="d-flex justify-content-center">
+								<label for="tecnologia" class="col-sm-4 col-form-label">Tecnologias</label>											
+									<div class="col-sm-4">								
+										<div class="form-check"  th:each="tecnologia :${tecnologias}" style="display: inline-block;">															
+											<input class="form-check-input" type="checkbox" name="tecnologias"
+											 	th:value="${tecnologia.id}">
+											 <label class="form-check-label" th:text="${tecnologia.nome}"></label>															  							  													
+										</div>
+									</div>
+							</div>
+						</div>	
+							
+						<div class="d-flex justify-content-center">													
+							<div class="form-group row" >
+								<label for="inicio_wa" class="col-sm-4 col-form-label">Código</label>
+								<div class="col">
+									<input type="text" class="form-control" id="codigo_vaga" th:field="*{codigo_vaga}"/>
+								</div>
+							</div>
+						</div>		
+						
+						<div class="d-flex justify-content-center">
+							<div class="form-group row">
+								<label for="Data WA" class="col-sm-4 control-label">Abertura</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control" id="inicio_wa" th:field=*{abertura_vaga}
+										data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt_BR"
+										data-date-autoclose="true" data-date-today-highlight="true" data-orientation="bottom"/>
+								</div>
+							</div>
+						</div>
+						
+						<div class="d-flex justify-content-center">
+							<div class="form-group row" >
+								<label for="inicio_wa" class="col-sm-4 col-form-label">Quantidade</label>
+								<div class="col-sm-4">
+									<input type="text" class="form-control" id="qtd_vaga" th:field="*{qtd_vaga}"/>
+								</div>
+							</div>	
+						</div>
+						
+						<div class="d-flex justify-content-center">	
+							<div class="form-group row">
+									<div class="col-md-3">
+										<button type="submit" class="btn btn-outline-success">Salvar</button>
+									</div>
+							</div>
+						</div>
+						
+					</div>	
+				</div>
+			</form>
+		</div>	
 	</section>
 	 
 </html>

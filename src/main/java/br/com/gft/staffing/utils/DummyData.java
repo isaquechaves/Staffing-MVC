@@ -12,16 +12,21 @@ import org.springframework.stereotype.Component;
 import br.com.gft.staffing.model.Funcionario;
 import br.com.gft.staffing.model.Gft;
 import br.com.gft.staffing.model.Tecnologia;
+import br.com.gft.staffing.model.User;
 import br.com.gft.staffing.model.Vaga;
 import br.com.gft.staffing.repository.FuncionarioRepository;
 import br.com.gft.staffing.repository.GftRepository;
 import br.com.gft.staffing.repository.TecnologiaRepository;
+import br.com.gft.staffing.repository.UserRepository;
 import br.com.gft.staffing.repository.VagaRepository;
 
 
 
 @Component
 public class DummyData {
+	
+	@Autowired
+	UserRepository userRepository;
 	
 	@Autowired
 	FuncionarioRepository funcionarioRepository;
@@ -38,6 +43,42 @@ public class DummyData {
 	
 		@PostConstruct	
 		public void saveFuncionario(){
+			
+			List<User> userList = new ArrayList<>();
+			
+			User user1 = new User();
+			user1.setUsername("isaque");
+			user1.setPassword("$2a$10$TxLoENb.IWq4F0q1HyIkGeF8Vpz26YKTtb6ThR0J9PVGWZfNyrDHy");
+			user1.setNome("Isaque Chaves");
+			user1.setAdmin(true);
+			
+			User user2 = new User();
+			user2.setUsername("convidade");
+			user2.setPassword("$2a$10$TxLoENb.IWq4F0q1HyIkGeF8Vpz26YKTtb6ThR0J9PVGWZfNyrDHy");
+			user2.setNome("Isaque Chaves");
+			user2.setAdmin(true);
+			
+			User user3 = new User();
+			user3.setUsername("henrique");
+			user3.setPassword("$2a$10$TxLoENb.IWq4F0q1HyIkGeF8Vpz26YKTtb6ThR0J9PVGWZfNyrDHy");
+			user3.setNome("Henrique");
+			user3.setAdmin(true);
+			
+			User user4 = new User();
+			user4.setUsername("usuario");
+			user4.setPassword("$2a$10$TxLoENb.IWq4F0q1HyIkGeF8Vpz26YKTtb6ThR0J9PVGWZfNyrDHy");
+			user4.setNome("usuario");
+			user4.setAdmin(true);
+			
+			userList.add(user1);
+			userList.add(user2);
+			userList.add(user3);
+			userList.add(user4);
+			
+			for(User user : userList) {
+				User userSaved = userRepository.save(user);
+				System.out.println(userSaved.getNome());
+			}
 			
 			List<Gft> gftList = new ArrayList<>();
 			

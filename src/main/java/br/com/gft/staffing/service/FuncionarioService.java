@@ -11,5 +11,6 @@ public interface FuncionarioService {
 	Funcionario findById(Long id);
 	Funcionario save(Funcionario funcionario);
 	List<Funcionario> filtrar(FuncionarioFilter filtro);
+	Funcionario deleteById(Long id);
 
 }

@@ -68,7 +68,7 @@ public class DummyData {
 			user4.setUsername("usuario");
 			user4.setPassword("$2a$10$TxLoENb.IWq4F0q1HyIkGeF8Vpz26YKTtb6ThR0J9PVGWZfNyrDHy");
 			user4.setNome("usuario");
-			user4.setAdmin(true);
+			user4.setAdmin(false);
 			
 			userList.add(user1);
 			userList.add(user2);
@@ -84,18 +84,18 @@ public class DummyData {
 			
 			Gft gft1 = new Gft();		
 			gft1.setCep("111-11");
-			gft1.setCidade("Gft Sorocaba");
-			gft1.setEndereco("rua gft");
+			gft1.setCidade("Sorocaba");
+			gft1.setEndereco("Rua GFT");
 			gft1.setEstado("SP");
-			gft1.setNome("gft sorocaba");
+			gft1.setNome("GFT Sorocaba");
 			gft1.setTelefone("124124124");
 			
 			Gft gft2 = new Gft();
 			gft2.setCep("111-11");
-			gft2.setCidade("Gft Sorocaba");
-			gft2.setEndereco("rua gft");
+			gft2.setCidade("São Paulo");
+			gft2.setEndereco("Rua GFT");
 			gft2.setEstado("SP");
-			gft2.setNome("gft SP");
+			gft2.setNome("GFT São Paulo");
 			gft2.setTelefone("124124124");
 			
 			gftList.add(gft1);

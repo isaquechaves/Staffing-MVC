@@ -15,7 +15,7 @@
 
 	<section layout:fragment="conteudo">
 	
-		<div class="card" style="padding-bottom: 30px; padding-left: 30px; padding-right: 30px;">
+		<div class="card" style="padding-bottom: 10px; padding-left: 10px; padding-right: 30px;">
 			<div class = "card-header">
 					<h3 class="card-title float-left">Pesquisa de funcionários</h3>
 					<a class ="btn btn-outline-success float-right"  href="/wa/funcionarios/cadastrar" role="button">Cadastrar funcionário</a>		
@@ -54,9 +54,10 @@
  				<tbody>
  					<tr th:each="funcionario :${funcionarios}" th:if="${funcionario.vaga} == null">
  						<td class="text-center" th:text="${funcionario.id}"></td>
+ 						
  						<td class="text-center" th:text="${funcionario.nome}"></td> 	
- 						 						 						
- 						<td class="text-center">
+ 										 						
+ 						<td class="text-center col">
  							<span  th:each="tecnologia : ${funcionario.tecnologias}"> 								 								
  								<div th:switch="${tecnologia.nome}" style="display: inline-block;"> 									 									 							
 	 								<img th:case="'Java'" th:src="@{/images/java.png}" >
@@ -72,17 +73,26 @@
  						<td class="text-center" th:text="${funcionario.gft.nome}"></td>
  						<td class="text-center" th:text="${{funcionario.inicio_wa}}"></td>
  						<td class="text-center" th:text="${{funcionario.termino_wa}}"></td> 
- 						<td class="text-center">
- 							<a class="btn btn-outline-warning btn-sm" th:href="@{/wa/funcionarios/cadastrar/{id}(id=${funcionario.id})}" 
- 								title="Editar" rel="tooltip" data-placement="top">
-								<img src="/images/pencil.png" height="15" width="15" />
-							</a> 								
+ 						<td class="text-center col">
+ 							<div class="d-flex justify-content-center" style="padding-top: 10px;">
+	 							<a class="btn btn-outline-warning btn-sm" th:href="@{/wa/funcionarios/cadastrar/{id}(id=${funcionario.id})}" 
+	 								title="Editar" rel="tooltip" data-placement="top">
+									<img src="/images/pencil.png" height="15" width="15" />
+								</a> 
+								<a class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#confirmarExclusaoModal"
+									th:attr="data-id=${funcionario.id}, data-nome=${funcionario.nome}"
+									title="Excluir" rel="tooltip" data-placement="top">
+									<img src="/images/delete.png" height="15" width="15" />
+								</a>
+							</div>											
 						</td>	
 						<td class="text-center">
-							<a class="btn btn-outline-success btn-sm" th:href="@{/wa/alocacao/{id}(id=${funcionario.id})}" 
-	 								title="Alocar" rel="tooltip" data-placement="top">
-									<img src="/images/alocar.png" height="15" width="15" />
-							</a> 
+							<div class="d-flex justify-content-center" style="padding-top: 10px;">
+								<a class="btn btn-outline-success btn-sm" th:href="@{/wa/alocacao/{id}(id=${funcionario.id})}" 
+		 								title="Alocar" rel="tooltip" data-placement="top">
+										<img src="/images/alocar.png" height="15" width="15" />
+								</a> 
+							</div>
 						</td>					 																											 				
  					</tr>
  					<tr>
@@ -91,9 +101,9 @@
  					
  				</tbody>
  			</table>
-			
+			<div layout:replace="ConfirmarExclusao"></div>
 		</div>
 	</section>
-
+	
 </body>
 </html>

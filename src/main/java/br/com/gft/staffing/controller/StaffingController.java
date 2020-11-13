@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.gft.staffing.model.Funcionario;
 import br.com.gft.staffing.model.Gft;
@@ -62,9 +63,8 @@ public class StaffingController {
 	@Autowired
 	TecnologiaService tecnologiaService;
 	
-		
 	@GetMapping(path = "/funcionarios/cadastrar")
-	@PreAuthorize("hasRole('USER')")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ModelAndView cadastro(@ModelAttribute("gft") Gft gft, @ModelAttribute("tecnologia") Tecnologia tecnologia) {
 		ModelAndView mv = new ModelAndView("cadastrar");
 		
@@ -96,11 +96,16 @@ public class StaffingController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(Funcionario funcionario) {							
+	public ModelAndView salvar(Funcionario funcionario,@ModelAttribute("filtro")FuncionarioFilter filtro) {							
 		
 		funcionario.setTermino_wa(funcionario.getInicio_wa().plusDays(14));
-		funcionarioService.save(funcionario);		
-		return "redirect:/wa/funcionarios";
+		funcionarioService.save(funcionario);	
+		
+		List<Funcionario> funcionarios = funcionarioService.filtrar(filtro);
+		
+		ModelAndView mv = new ModelAndView("funcionarios");
+		mv.addObject("funcionarios", funcionarios);
+		return mv;
 		
 	}
 	
@@ -150,7 +155,13 @@ public class StaffingController {
 		
 	}
 	
-	
+	@RequestMapping(value = "/funcionarios/{id}", method = RequestMethod.DELETE)
+	@PreAuthorize("hasRole('ADMIN')")
+	public String excluir(@PathVariable Long id, RedirectAttributes attributes) {
+		
+		funcionarioService.deleteById(id);
+		return "redirect:/wa/funcionarios";
+	}
 	
 	@GetMapping(path = "/vagas")
 	@PreAuthorize("hasRole('USER')")
@@ -161,6 +172,18 @@ public class StaffingController {
 		ModelAndView mv = new ModelAndView("vagas");
 		mv.addObject("vagas", vagas);
 		return mv;
+	}
+	
+	@RequestMapping(value = "/vagas/{id}")//Excluindo vagas
+	@PreAuthorize("hasRole('ADMIN')")
+	public String excluirVaga(Vaga vaga, @PathVariable Long id, RedirectAttributes attributes) {
+		
+		Vaga vagaEdit = vagaRepository.getOne(id);
+		
+		vagaEdit.setQtd_vaga(0); 
+		vagaService.save(vagaEdit);
+		
+		return "redirect:/wa/vagas";
 	}
 
 	
@@ -199,10 +222,23 @@ public class StaffingController {
 	
 	@RequestMapping(value = "/vagas/cadastrar", method = RequestMethod.POST)
 	@PreAuthorize("hasRole('ADMIN')")
-	public String salvar(Vaga vaga) {			
-				
-		vagaService.save(vaga);		
-		return "redirect:/wa/vagas";
+	public ModelAndView salvar(Vaga vaga,@ModelAttribute("filtro")VagaFilter filtro) {			
+										
+		vagaService.save(vaga);	
+		
+		String cod1 = vaga.getCliente().substring(0,3);
+		String cod2 = Long.toString(vaga.getId());		
+		String codigoVaga = cod1.concat(cod2);
+		System.out.println(codigoVaga);
+		vaga.setCodigo_vaga(codigoVaga);
+		vagaService.save(vaga);	
+		
+		List<Vaga> vagas = vagaService.filtrar(filtro);
+		
+		ModelAndView mv = new ModelAndView("vagas");
+		mv.addObject("vagas", vagas);
+		
+		return mv;
 		
 	}
 	
@@ -246,7 +282,7 @@ public class StaffingController {
 		vaga.setQtd_vaga(vaga.getQtd_vaga()-1);
 		vagaService.save(vaga);
 		
-		return "redirect:/wa/funcionarios";
+		return "redirect:/wa/historico";
 		
 	}
 }

@@ -26,12 +26,12 @@
 				<div class="card" style="width: 18rem;">
 					<img src="/images/dev.png" class="card-img-top" style="width: 128px; margin-left: auto; margin-right: auto; padding-top: 5px;">							
 					<h5 class="card-title text-center" th:text="${funcionario.nome}" style="padding-top: 5px;"></h5>
-						<div class="card-header">Level</div>									
-							<span class="list-group-item" th:text="${funcionario.level}"></span>	
-						<div class="card-header">Cargo</div>
-							<span class="list-group-item" th:text="${funcionario.cargo}"></span>															
-						<div class="card-header">Tecnologias</div>									
-							<span class="list-group-item" th:each="tecnologia : ${funcionario.tecnologias}" th:text="${tecnologia.nome}"></span>																															
+						<div class="card-header text-center"><strong>Level</strong></div>									
+							<span class="list-group-item text-center" th:text="${funcionario.level}"></span>	
+						<div class="card-header text-center"><strong>Cargo</strong></div>
+							<span class="list-group-item text-center" th:text="${funcionario.cargo}"></span>															
+						<div class="card-header text-center"><strong>Tecnologias</strong></div>									
+							<span class="list-group-item text-center" th:each="tecnologia : ${funcionario.tecnologias}" th:text="${tecnologia.nome}"></span>																															
 				</div>		
 				
 				<form method="POST" action="/wa/alocacao" th:object="${funcionario}">
@@ -39,7 +39,9 @@
 						<div class="d-flex justify-content-center" style="padding-top: 10px;">
 							<div style="padding-top: 200px;">
 								<h4 class="text-center">Alocar</h4>
+								
 								<button type="submit" class="btn btn-outline-light"><img src="/images/alocar.png"></button>
+								 	
 							</div>	
 								<div style="display: none;">
 									<input type="text" class="form-control" id="nome" th:field="*{nome}"/>
@@ -52,25 +54,27 @@
 									<input type="text" class="form-control" id="gft" name="inicio_alocacao" th:value="${#dates.format(#dates.createNow(), 'dd/MM/yyyy')}"/>
 									
 								</div>								
-						<div class="card" style="width: 18rem;" th:object="${vagas}">
+						<div class="card" style="width: 25rem;" th:object="${vagas}">
 							<img src="/images/job.png" class="card-img-top" style="width: 128px; margin-left: auto; margin-right: auto; padding-top: 5px;">																					
 							<h5 class="card-title text-center" style="padding-top: 5px;" >
-								Vagas
+								<strong>Vagas</strong>
 							</h5>				
 							<table class="table table-striped table-bordered table-sm" th:object="${vagas}">
 							<thead class="thead-dark">
 								<tr>															
 									<th class="text-center col-md1">Descrição</th>
 									<th class="text-center col-md1">Código</th>
+									<th class="text-center col-md1">Projeto</th>
 									<th class="text-center col-md1">Selecionar</th>										
 								</tr>								
 								</thead>
 								<tbody>
 									<tr th:each="vaga :${vagas}" th:if="${vaga.qtd_vaga} > 0">
 						 		 			<td class="text-center" th:text="${vaga.descricao_vaga}"></td> 
-						 		 			<td class="text-center" th:text="${vaga.codigo_vaga}"></td> 
+						 		 			<td class="text-center" th:text="${vaga.codigo_vaga}"></td>
+						 		 			<td class="text-center" th:text="${vaga.projeto}"></td>
 						 		 			<td	class="text-center">								 		 										 		 				
-												<input class="form-check-input text-center" type="checkbox"  name="vaga"  th:value="${vaga.id}"/>																																					  				 		 											
+												<input class="form-check-input" type="radio"  name="vaga"  th:value="${vaga.id}"/>																																					  				 		 											
 						 		 			</td>
 						 				</tr>
 								</tbody>

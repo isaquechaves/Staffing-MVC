@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns ="http://www.w3.org./1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<meta charset="UTF-8"/>
+
+	<div class="modal fade" id="confirmarExclusaoVagasModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"> 
+		
+		<form th:attr="data-url-base='/wa/vagas'" method="POST" th:method="POST">						
+			<div class="modal-dialog">
+	    		<div class="modal-content">
+	    			<div class="modal-header">
+		       		 	<h4 class="modal-title">Confirmação de exclusão</h4>		        		
+		        	</div>
+		        	<div class="modal-body">				       
+				         <span>Tem certeza que deseja excluir este funcionário?</span>				        
+				    </div>
+				    
+				    <div class="modal-footer">
+				        <button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+				        <button type="submit" class="btn btn-primary" >Excluir</button>
+	     			 </div>
+		    	</div>
+			</div>
+		</form>
+	</div>
+</html>

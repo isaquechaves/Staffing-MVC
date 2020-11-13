@@ -36,5 +36,12 @@ public class FuncionarioImpl implements FuncionarioService {
 		String nome = filtro.getNome() == null ? "" : filtro.getNome();
 		return funcionarioRepository.findByNomeContaining(nome);
 	}
-	
+
+	@Override
+	public Funcionario deleteById(Long id) {
+		funcionarioRepository.deleteById(id);
+		return null;
+	}
+
+
 }

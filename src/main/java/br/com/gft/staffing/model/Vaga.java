@@ -30,7 +30,6 @@ public class Vaga {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate aberturaVaga;
 	
-	@NotBlank(message = "Código é obrigatório")
 	@Size(max = 10, message = "Código não pode conter mais de 10 caracteres")
 	private String codigoVaga;
 	

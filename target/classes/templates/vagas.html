@@ -47,8 +47,8 @@
 						<th class="text-center col-md1">Projeto</th>
 						<th class="text-center col-md1">Cliente</th>	
 						<th class="text-center col-md1">Tecnologias</th>					
-						<th class="text-center col-md1">Quantidade</th>
-						<th class="text-center col-md2">Abertura</th>
+						<th class="text-center col-md1">Qtde.</th>
+						<th class="text-center col-md1">Abertura</th>
 						<th class="text-center col-md1">Código Vaga</th>
 						<th class="text-center col-md1">Alterar</th>
 						
@@ -60,7 +60,7 @@
  						<td class="text-center" th:text="${vaga.descricao_vaga}"></td> 	
  						<td class="text-center" th:text="${vaga.projeto}"></td>
  						<td class="text-center" th:text="${vaga.cliente}"></td> 	 						
- 						<td class="text-center">
+ 						<td class="text-center col">
  							<span th:each="tecnologia : ${vaga.tecnologias}">
  								<div th:switch="${tecnologia.nome}" style="display: inline-block;"> 									 									 							
 	 								<img th:case="'Java'" th:src="@{/images/java.png}" >
@@ -76,10 +76,17 @@
  						<td class="text-center" th:text="${{vaga.abertura_vaga}}"></td>	  						
  						<td class="text-center" th:text="${vaga.codigo_vaga}"></td> 
  						<td class="text-center">
- 							<a class="btn btn-outline-warning btn-sm" th:href="@{/wa/vagas/cadastrar/{id}(id=${vaga.id})}" 
- 								title="Editar" rel="tooltip" data-placement="top">
-								<img src="/images/pencil.png" height="15" width="15" />
-							</a> 	
+ 							<div class="d-flex justify-content-center" style="padding-top: 10px;">
+	 							<a class="btn btn-outline-warning btn-sm" th:href="@{/wa/vagas/cadastrar/{id}(id=${vaga.id})}" 
+	 								title="Editar" rel="tooltip" data-placement="top">
+									<img src="/images/pencil.png" height="15" width="15" />
+								</a>
+								<a class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#confirmarExclusaoVagasModal"
+									th:attr="data-id=${vaga.id}, data-descricao=${vaga.descricao_vaga}" 
+	 								title="Excluir" rel="tooltip" data-placement="top">
+									<img src="/images/delete.png" height="15" width="15" />
+								</a> 	
+							</div>
 						</td>	 						 						 						 					 																					 				
  					</tr>
  					<tr>
@@ -88,7 +95,7 @@
  					
  				</tbody>
  			</table>
-			
+			<div layout:replace="ConfirmarExclusaoVaga"></div>
 		</div>
 	</section>
 	

@@ -1,6 +1,6 @@
 # Staffing-MVC
 Gerenciador de funcionário em WA
 User para acesso ao sistema:
-user:convidade
-pass:12345
-BD:MySQL
+<br>user:convidadp
+<br>pass:12345
+<br>BD:MySQL
